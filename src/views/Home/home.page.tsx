@@ -6,7 +6,7 @@ function HomePage(): ReactElement {
   const location = useLocation();
 
   return (
-    <main>
+    <>
       <span>Homepage</span>
       <Link to="/user/1223" state={{ background: location }}>
         Open user
@@ -14,7 +14,7 @@ function HomePage(): ReactElement {
 
       {/* User Modal */}
       <Outlet />
-    </main>
+    </>
   );
 }
 

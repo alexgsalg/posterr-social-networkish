@@ -10,18 +10,20 @@ function App() {
   return (
     <>
       <HeaderComponent />
-      <Routes location={background || location}>
-        <Route path="/" element={<HomePage />}>
-          <Route path="all" element={<HomePage />} />
-          <Route path="following" element={<HomePage />} />
-        </Route>
-        <Route path="user/:id" element={<UserPage />} />
-      </Routes>
-      {background && (
-        <Routes>
+      <main className="main-content">
+        <Routes location={background || location}>
+          <Route path="/" element={<HomePage />}>
+            <Route path="all" element={<HomePage />} />
+            <Route path="following" element={<HomePage />} />
+          </Route>
           <Route path="user/:id" element={<UserPage />} />
         </Routes>
-      )}
+        {background && (
+          <Routes>
+            <Route path="user/:id" element={<UserPage />} />
+          </Routes>
+        )}
+      </main>
     </>
   );
 }
