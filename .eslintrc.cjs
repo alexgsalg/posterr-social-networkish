@@ -8,9 +8,9 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'plugin:prettier/recommended',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', '*.test.tsx'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh', 'react-hooks'],
+  plugins: ['react-refresh', 'react-hooks', 'prettier'],
   rules: {
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
   },
