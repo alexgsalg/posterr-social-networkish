@@ -1,4 +1,10 @@
+@import '../node_modules/bootstrap/scss/bootstrap';
 @import './assets/sass/global.scss';
+
+$theme-colors: (
+  'primary': #4d3cc6,
+  'secondary': #5d5a6d,
+);
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
