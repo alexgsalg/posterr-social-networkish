@@ -2,9 +2,9 @@ module.exports = {
   bracketSameLine: true,
   bracketSpacing: true,
   singleQuote: true,
-  trailingComma: "all",
+  trailingComma: 'es5',
   tabWidth: 2,
-  useTabs: false,
   semi: true,
+  'html.format.wrapAttributes': 'force-aligned',
   printWidth: 100,
 };
