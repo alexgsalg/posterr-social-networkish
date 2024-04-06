@@ -1,0 +1,22 @@
+[
+  {
+    "userId": "cb4a7647-5f36-4f11-a37c-0f3a1a943764",
+    "userName": "Alex Salgado",
+    "location": "Brasil",
+    "profilePicture": "./assets/images/avatar.png",
+    "following": [],
+    "followers": [],
+    "posts": [],
+    "createdAt": "Mon, 01 Jan 2024 00:00:00 GMT"
+  },
+  {
+    "userId": "3e7c8c16-ce46-4267-b031-6c40acb30dda",
+    "userName": "Chuck Smith",
+    "location": "Canada",
+    "profilePicture": "./assets/images/avataaars.png",
+    "following": [],
+    "followers": [],
+    "posts": [],
+    "createdAt": "Mon, 01 Aug 2022 00:00:00 GMT"
+  }
+]

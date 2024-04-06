@@ -1,0 +1,59 @@
+[
+  {
+    "postId": "ffb228a3-da97-4b40-922c-a37a4c969816",
+    "user": {
+      "userId": "cb4a7647-5f36-4f11-a37c-0f3a1a943764",
+      "userName": "Alex Salgado",
+      "profilePicture": "./assets/images/avatar.png"
+    },
+    "content": "Hello everyone, I'm new to Posterr.",
+    "likes": [],
+    "createdAt": "Sun, 06 Aug 2023 00:00:00 GMT",
+    "comments": [],
+    "isRepost": false
+  },
+  {
+    "postId": "ffb228a3-sf58-4b40-922c-a37a4c541287",
+    "user": {
+      "userId": "3e7c8c16-ce46-4267-b031-6c40acb30dda",
+      "userName": "Chuck Smith",
+      "profilePicture": "./assets/images/avataaars.png"
+    },
+    "content": "This is my second post, I'm still learning how to do stuff and all",
+    "likes": ["cb4a7647-5f36-4f11-a37c-0f3a1a943764"],
+    "createdAt": "Wed, 02 Aug 2023 00:00:00 GMT",
+    "comments": [
+      {
+        "postId": "ffb228a3-sf58-4b40-922c-a37a4c541287",
+        "user": {
+          "userId": "cb4a7647-5f36-4f11-a37c-0f3a1a943764",
+          "userName": "Alex Salgado",
+          "profilePicture": "./assets/images/avatar.png"
+        },
+        "content": "Ohh! I can reply to your posts! Nice!!",
+        "likes": [],
+        "createdAt": "Wed, 02 Aug 2023 00:00:00 GMT",
+        "comments": [],
+        "interactions": []
+      }
+    ]
+  },
+  {
+    "postId": "9b8fc9d8-c72f-4609-93dc-6e5955bd1de4",
+    "user": {
+      "userId": "3e7c8c16-ce46-4267-b031-6c40acb30dda",
+      "userName": "Chuck Smith",
+      "profilePicture": "./assets/images/avataaars.png"
+    },
+    "content": "Ohh! I can reply to your posts! Nice!!",
+    "likes": [],
+    "createdAt": "Thu, 03 Aug 2023 00:00:00 GMT",
+    "comments": [],
+    "isRepost": true,
+    "repostFrom": {
+      "userId": "cb4a7647-5f36-4f11-a37c-0f3a1a943764",
+      "userName": "Alex Salgado",
+      "profilePicture": "./assets/images/avatar.png"
+    }
+  }
+]
