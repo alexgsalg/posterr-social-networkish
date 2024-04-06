@@ -6,5 +6,5 @@ module.exports = {
   tabWidth: 2,
   semi: true,
   'html.format.wrapAttributes': 'force-aligned',
-  printWidth: 100,
+  printWidth: 80,
 };
