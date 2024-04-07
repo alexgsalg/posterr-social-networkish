@@ -6,6 +6,7 @@ import {
 } from '@reduxjs/toolkit';
 import { Post } from '../../models/post.model';
 import axios, { AxiosError } from 'axios';
+import { User } from '../../models/user.model';
 
 export interface PostState {
   posts: Post[];
@@ -53,8 +54,11 @@ const postsSlice = createSliceWithThunks({
   }),
   selectors: {
     selectPosts: (sliceState) => sliceState.posts,
-    selectPostById: (sliceState, id: string): Post | undefined => {
-      return sliceState.posts.find((el) => el.id === id) || undefined;
+    selectPostByUser: (sliceState, userId: string): Post[] => {
+      return sliceState.posts.filter((el) => el.user === userId) || [];
+    },
+    selectFollowingPost: (sliceState, ids: string[]): Post[] => {
+      return sliceState.posts.filter((el) => ids.includes(el.user)) || [];
     },
     selectPostLoading: (sliceState) => sliceState.isLoading || false,
     selectPostsError: (sliceState) => sliceState.error || null,
@@ -63,6 +67,11 @@ const postsSlice = createSliceWithThunks({
 
 export const { setPosts, updatePost, postLoading, postError } =
   postsSlice.actions;
-export const { selectPosts, selectPostLoading, selectPostsError } =
-  postsSlice.selectors;
+export const {
+  selectPosts,
+  selectPostByUser,
+  selectFollowingPost,
+  selectPostLoading,
+  selectPostsError,
+} = postsSlice.selectors;
 export default postsSlice.reducer;
