@@ -1,0 +1,65 @@
+:host {
+  position: sticky;
+  top: 1rem;
+}
+
+.card {
+  position: relative;
+  padding-top: 1rem;
+  background-color: var(--clr-gray-600);
+  overflow: hidden;
+  border: none;
+
+  &__top-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: block;
+    max-height: 120px;
+    background-color: var(--bs-gray-dark);
+    z-index: 0;
+  }
+
+  &_body {
+    position: relative;
+    row-gap: 1.5rem;
+    z-index: 1;
+
+    &_picture {
+      width: 100%;
+      max-width: 120px;
+      margin-inline: auto;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    &_info {
+    }
+
+    &__name {
+      font-size: 1.25rem;
+    }
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 768px) {
+  .card {
+    &__top-effect {
+      max-height: 1rem;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .card {
+    padding-top: 1.5rem;
+
+    &__top-effect {
+      max-height: unset;
+    }
+
+    &_body {
+    }
+  }
+}

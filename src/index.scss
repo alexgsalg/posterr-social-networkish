@@ -23,5 +23,8 @@ $theme-colors: (
 }
 
 .main-content {
+  min-height: 100vh;
+  background-color: var(--clr-posterr-700);
   padding-top: var(--header-height);
+  color: var(--bs-light);
 }

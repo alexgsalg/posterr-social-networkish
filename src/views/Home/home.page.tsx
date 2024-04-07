@@ -1,16 +1,30 @@
 import { ReactElement } from 'react';
-import { Link, Outlet, useLocation } from 'react-router-dom';
-// import style from './home.style.scss';
+import { Outlet } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+import UserCard from '../../components/UserCard/user-card.component';
+import { selectLoggedUser } from '../../store/user/user.slice';
+import { User } from '../../models/user.model';
+import style from './home.module.scss';
 
 function HomePage(): ReactElement {
-  const location = useLocation();
+  // const users = useSelector(selectUsers) as User[];
+  const loggedUser = useSelector(selectLoggedUser) as User;
 
   return (
     <>
-      <span>Homepage</span>
-      <Link to="/user/1223" state={{ background: location }}>
-        Open user
-      </Link>
+      <section className={style.home + ' px-2 py-4'}>
+        <div className={style.home_container + ' container-fluid'}>
+          <div className={style.container_left + ' col-12 col-md-4 col-lg-3'}>
+            <UserCard user={loggedUser} />
+          </div>
+
+          <div
+            className={
+              style.container_left + ' col-12 col-md-8 col-lg-9'
+            }></div>
+        </div>
+      </section>
 
       {/* User Modal */}
       <Outlet />

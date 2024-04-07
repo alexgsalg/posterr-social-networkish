@@ -11,6 +11,7 @@ function App() {
   const location = useLocation();
   const background = location.state && location.state.background;
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     initUsers();
   });
