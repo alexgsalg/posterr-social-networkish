@@ -4,16 +4,3 @@
     margin-inline: auto;
   }
 }
-
-.nav {
-  gap: 0.5rem;
-  border-bottom: 1px solid var(--bs-gray-400);
-
-  &-link {
-    color: var(--bs-dark);
-
-    &.active {
-      border-bottom: 2px solid var(--bs-primary) !important;
-    }
-  }
-}

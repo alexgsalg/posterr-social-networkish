@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import HeaderComponent from './components/Header/header.component';
 import HomePage from './views/Home/home.page.tsx';
 import UserPage from './views/User/user.page.tsx';
@@ -27,7 +27,8 @@ function App() {
       <HeaderComponent />
       <main className="main-content">
         <Routes location={background || location}>
-          <Route path="/" element={<HomePage />}>
+          <Route path="/">
+            <Route element={<Navigate replace to="/all" />} index />
             <Route path="all" element={<HomePage />} />
             <Route path="following" element={<HomePage />} />
           </Route>

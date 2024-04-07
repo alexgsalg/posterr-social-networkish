@@ -1,0 +1,23 @@
+.nav {
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--clr-gray-500);
+
+  &__item {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: var(--bs-light);
+    transition: all 195ms ease;
+    border-bottom: 4px solid transparent !important;
+    text-decoration: none;
+
+    &:hover {
+      color: var(--clr-gray-100);
+      border-bottom: 4px solid var(--clr-posterr-300) !important;
+    }
+  }
+  &__item_active {
+    @extend .nav__item;
+    color: var(--clr-gray-100);
+    border-bottom: 4px solid var(--clr-posterr-400) !important;
+  }
+}
