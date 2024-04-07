@@ -1,6 +1,8 @@
 import { ReactElement } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { IoLocationOutline } from 'react-icons/io5';
+import { format } from 'date-fns';
+
+import { IoLocationOutline, IoCalendarOutline } from 'react-icons/io5';
 import { User } from '../../models/user.model';
 import style from './user-card.module.scss';
 
@@ -12,7 +14,7 @@ function UserCard({ user }: IUserCard): ReactElement {
   const location = useLocation();
 
   return (
-    <article className={style.card + ' pt-md-4 shadow-sm'}>
+    <article className={style.card + ' pt-md-4 shadow'}>
       <span className={style.card__topeffect + ' h-25'}></span>
       <div
         className={
@@ -44,34 +46,38 @@ function UserCard({ user }: IUserCard): ReactElement {
           </div>
 
           <div className="col-12">
-            <div className={style.card_body_details + ' d-flex mt-3 mb-4'}>
-              <div className="col-6 text-center">
-                <p
-                  className={
-                    style.card_body_details__name + ' text-light fw-medium'
-                  }>
+            <div className={'row gy-3 mt-3 mb-4 mx-0'}>
+              <div className="col-6 px-2">
+                <p className={'text-secondary'}>
+                  <span className={'text-light fw-medium pe-2'}>
+                    {user?.followers?.length}
+                  </span>
                   Followers
                 </p>
-                <span
-                  className={
-                    style.card_body_details__counter + ' text-secondary'
-                  }>
-                  {user?.followers?.length}
-                </span>
               </div>
-              <div className="col-6 text-center border-start">
-                <p
-                  className={
-                    style.card_body_details__name + ' text-light fw-medium'
-                  }>
+              <div className="col-6 px-2 text-end">
+                <p className={'text-secondary'}>
+                  <span className={'text-light fw-medium pe-2'}>
+                    {user?.following?.length}
+                  </span>
                   Following
                 </p>
-                <span
-                  className={
-                    style.card_body_details__counter + ' text-secondary'
-                  }>
-                  {user?.following?.length}
-                </span>
+              </div>
+              <div className="col-4 px-2">
+                <p className={'text-secondary'}>
+                  <span className={'text-light fw-medium pe-2'}>
+                    {user?.posts?.length}
+                  </span>
+                  Posts
+                </p>
+              </div>
+              <div className="col-8 px-2 text-end">
+                <p className={'text-secondary'}>
+                  <IoCalendarOutline />
+                  <span className={'text-light ps-2'}>
+                    {format(user?.createdAt, 'MMMM d, yyyy')}
+                  </span>
+                </p>
               </div>
             </div>
 

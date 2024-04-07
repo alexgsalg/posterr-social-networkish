@@ -15,13 +15,13 @@ function HomePage(): ReactElement {
     <>
       <section className={style.home + ' px-2 py-4'}>
         <div className={style.home_container + ' container-fluid'}>
-          <div className={style.container_left + ' col-12 col-md-4 col-lg-3'}>
+          <div className={style.container_left + ' col-12 col-md-4 col-lg-4'}>
             <UserCard user={loggedUser} />
           </div>
 
           <div
             className={
-              style.container_left + ' col-12 col-md-8 col-lg-9'
+              style.container_left + ' col-12 col-md-8 col-lg-8'
             }></div>
         </div>
       </section>

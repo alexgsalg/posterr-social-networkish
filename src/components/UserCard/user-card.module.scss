@@ -1,16 +1,12 @@
-:host {
-  position: sticky;
-  top: 1rem;
-}
-
 .card {
   position: relative;
   padding-top: 1rem;
   background-color: var(--clr-gray-600);
-  overflow: hidden;
   border: none;
+  border-radius: 0.5rem;
+  overflow: hidden;
 
-  &__top-effect {
+  &__topeffect {
     position: absolute;
     top: 0;
     left: 0;
@@ -45,7 +41,7 @@
 
 @media screen and (min-width: 576px) and (max-width: 768px) {
   .card {
-    &__top-effect {
+    &__topeffect {
       max-height: 1rem;
     }
   }
@@ -55,11 +51,8 @@
   .card {
     padding-top: 1.5rem;
 
-    &__top-effect {
+    &__topeffect {
       max-height: unset;
-    }
-
-    &_body {
     }
   }
 }

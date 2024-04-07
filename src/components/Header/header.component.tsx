@@ -10,8 +10,8 @@ function HeaderComponent(): ReactElement {
   const user = useSelector(selectLoggedUser);
 
   return (
-    <header className={style.header + ' bg-dark py-3'}>
-      <div className="container d-flex justify-content-between align-items-center">
+    <header className={style.header + ' bg-dark p-3'}>
+      <div className="container-fluid d-flex justify-content-between align-items-center px-2">
         <div
           className={
             style.header_brand +
