@@ -1,59 +1,125 @@
 [
   {
-    "postId": "ffb228a3-da97-4b40-922c-a37a4c969816",
-    "user": {
-      "userId": "cb4a7647-5f36-4f11-a37c-0f3a1a943764",
-      "userName": "Alex Salgado",
-      "profilePicture": "./assets/images/avatar.png"
-    },
-    "content": "Hello everyone, I'm new to Posterr.",
-    "likes": [],
-    "createdAt": "Sun, 06 Aug 2023 00:00:00 GMT",
+    "user": "2f5cc827-7650",
+    "targetUser": null,
+    "content": "Earum reiciendis nulla provident praesentium provident vitae molestiae aliquid.",
+    "likes": ["b0c6a651-92e1"],
+    "createdAt": "2023-06-10T02:52:16.945Z",
     "comments": [],
-    "isRepost": false
+    "repost": null,
+    "id": "1"
   },
   {
-    "postId": "ffb228a3-sf58-4b40-922c-a37a4c541287",
-    "user": {
-      "userId": "3e7c8c16-ce46-4267-b031-6c40acb30dda",
-      "userName": "Chuck Smith",
-      "profilePicture": "./assets/images/avataaars.png"
-    },
-    "content": "This is my second post, I'm still learning how to do stuff and all",
-    "likes": ["cb4a7647-5f36-4f11-a37c-0f3a1a943764"],
-    "createdAt": "Wed, 02 Aug 2023 00:00:00 GMT",
-    "comments": [
-      {
-        "postId": "ffb228a3-sf58-4b40-922c-a37a4c541287",
-        "user": {
-          "userId": "cb4a7647-5f36-4f11-a37c-0f3a1a943764",
-          "userName": "Alex Salgado",
-          "profilePicture": "./assets/images/avatar.png"
-        },
-        "content": "Ohh! I can reply to your posts! Nice!!",
-        "likes": [],
-        "createdAt": "Wed, 02 Aug 2023 00:00:00 GMT",
-        "comments": [],
-        "interactions": []
-      }
-    ]
+    "user": "b0c6a651-92e1",
+    "targetUser": "2f5cc827-7650",
+    "content": "Illo eligendi tempore aperiam aliquid id autem sit dolor.",
+    "likes": ["b4a09bac-382c"],
+    "createdAt": "2023-11-30T15:28:09.894Z",
+    "comments": [],
+    "repost": null,
+    "id": "2"
   },
   {
-    "postId": "9b8fc9d8-c72f-4609-93dc-6e5955bd1de4",
-    "user": {
-      "userId": "3e7c8c16-ce46-4267-b031-6c40acb30dda",
-      "userName": "Chuck Smith",
-      "profilePicture": "./assets/images/avataaars.png"
-    },
-    "content": "Ohh! I can reply to your posts! Nice!!",
-    "likes": [],
-    "createdAt": "Thu, 03 Aug 2023 00:00:00 GMT",
+    "user": "2f5cc827-7650",
+    "targetUser": "b4a09bac-382c",
+    "content": "Tempore molestiae veritatis alias maiores.",
+    "likes": ["b4a09bac-382c", "b0c6a651-92e1"],
+    "createdAt": "2023-05-09T15:53:21.566Z",
     "comments": [],
-    "isRepost": true,
-    "repostFrom": {
-      "userId": "cb4a7647-5f36-4f11-a37c-0f3a1a943764",
-      "userName": "Alex Salgado",
-      "profilePicture": "./assets/images/avatar.png"
-    }
+    "repost": null,
+    "id": "3"
+  },
+  {
+    "user": "b4a09bac-382c",
+    "targetUser": null,
+    "content": "Harum nulla alias veritatis.",
+    "likes": ["70e6dcf1-c526", "b0c6a651-92e1"],
+    "createdAt": "2023-04-13T22:24:47.477Z",
+    "comments": [],
+    "repost": null,
+    "id": "4"
+  },
+  {
+    "user": "70e6dcf1-c526",
+    "targetUser": "targetUser 5",
+    "content": "Accusamus aut ad sit laudantium quaerat cum rem.",
+    "likes": ["2f5cc827-7650"],
+    "createdAt": "2023-12-29T01:35:46.728Z",
+    "comments": [],
+    "repost": null,
+    "id": "5"
+  },
+  {
+    "user": "b4a09bac-382c",
+    "targetUser": "targetUser 6",
+    "content": "Asperiores mollitia velit molestias provident.",
+    "likes": ["b0c6a651-92e1", "2f5cc827-7650"],
+    "createdAt": "2024-02-16T02:32:40.829Z",
+    "comments": [],
+    "repost": {},
+    "id": "6"
+  },
+  {
+    "user": "70e6dcf1-c526",
+    "targetUser": null,
+    "content": "Asperiores sed a aspernatur voluptas.",
+    "likes": ["b4a09bac-382c"],
+    "createdAt": "2023-10-17T10:33:59.282Z",
+    "comments": [],
+    "repost": {
+      "postId": "8",
+      "userId": "b4a09bac-382c"
+    },
+    "id": "7"
+  },
+  {
+    "user": "b4a09bac-382c",
+    "targetUser": null,
+    "content": "Asperiores sed a aspernatur voluptas.",
+    "likes": ["70e6dcf1-c526"],
+    "createdAt": "2024-02-11T04:48:37.931Z",
+    "comments": [],
+    "repost": null,
+    "id": "8"
+  },
+  {
+    "user": "2f5cc827-7650",
+    "targetUser": null,
+    "content": "Atque in aliquid expedita commodi officiis quaerat quis.",
+    "likes": ["b4a09bac-382c", "70e6dcf1-c526"],
+    "createdAt": "2023-08-14T01:28:57.795Z",
+    "comments": [],
+    "repost": null,
+    "id": "9"
+  },
+  {
+    "user": "b0c6a651-92e1",
+    "targetUser": null,
+    "content": "Animi saepe aliquid animi quas voluptatibus et quam dignissimos.",
+    "likes": ["70e6dcf1-c526"],
+    "createdAt": "2023-07-25T12:06:16.643Z",
+    "comments": [],
+    "repost": null,
+    "id": "10"
+  },
+  {
+    "user": "2f5cc827-7650",
+    "targetUser": null,
+    "content": "Maxime praesentium nobis.",
+    "likes": ["70e6dcf1-c526"],
+    "createdAt": "2023-12-18T05:19:39.394Z",
+    "comments": [],
+    "repost": null,
+    "id": "11"
+  },
+  {
+    "user": "b0c6a651-92e1",
+    "targetUser": null,
+    "content": "Voluptas ducimus animi voluptates ipsam ea nulla excepturi maiores.",
+    "likes": ["b4a09bac-382c", "2f5cc827-7650"],
+    "createdAt": "2023-08-28T18:33:01.080Z",
+    "comments": [],
+    "repost": null,
+    "id": "12"
   }
 ]

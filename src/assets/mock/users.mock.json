@@ -1,22 +1,38 @@
 [
   {
-    "userId": "cb4a7647-5f36-4f11-a37c-0f3a1a943764",
-    "userName": "Alex Salgado",
-    "location": "Brasil",
-    "profilePicture": "./assets/images/avatar.png",
-    "following": [],
-    "followers": [],
-    "posts": [],
-    "createdAt": "Mon, 01 Jan 2024 00:00:00 GMT"
+    "name": "Gabriel Graham",
+    "location": "Wyoming",
+    "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/299.jpg",
+    "following": ["b0c6a651-92e1", "b4a09bac-382c", "70e6dcf1-c526"],
+    "followers": ["b0c6a651-92e1"],
+    "createdAt": "2023-05-18T19:50:34.684Z",
+    "id": "2f5cc827-7650"
   },
   {
-    "userId": "3e7c8c16-ce46-4267-b031-6c40acb30dda",
-    "userName": "Chuck Smith",
-    "location": "Canada",
-    "profilePicture": "./assets/images/avataaars.png",
-    "following": [],
-    "followers": [],
-    "posts": [],
-    "createdAt": "Mon, 01 Aug 2022 00:00:00 GMT"
+    "name": "Tanya Zieme",
+    "location": "Arizona",
+    "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/466.jpg",
+    "following": ["2f5cc827-7650", "b4a09bac-382c"],
+    "followers": ["2f5cc827-7650", "70e6dcf1-c526"],
+    "createdAt": "2023-11-23T11:16:10.153Z",
+    "id": "b0c6a651-92e1"
+  },
+  {
+    "name": "Sonja MacGyver",
+    "location": "Montana",
+    "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1158.jpg",
+    "following": ["2f5cc827-7650"],
+    "followers": ["2f5cc827-7650", "b0c6a651-92e1"],
+    "createdAt": "2023-05-22T09:48:30.277Z",
+    "id": "b4a09bac-382c"
+  },
+  {
+    "name": "Flora Pfannerstill",
+    "location": "Nebraska",
+    "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/661.jpg",
+    "following": ["2f5cc827-7650", "b0c6a651-92e1", "b4a09bac-382c"],
+    "followers": ["2f5cc827-7650"],
+    "createdAt": "2024-01-31T20:56:38.216Z",
+    "id": "70e6dcf1-c526"
   }
 ]

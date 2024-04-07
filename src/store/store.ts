@@ -12,6 +12,7 @@ import {
 import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2';
 import storage from 'redux-persist/lib/storage';
 import rootReducer from './root-reducer';
+import { useDispatch } from 'react-redux';
 
 const persistConfig = {
   key: 'root',
@@ -35,7 +36,7 @@ const store = configureStore({
 });
 
 export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch = () => useDispatch<typeof store.dispatch>();
 
 export const persistor = persistStore(store);
 export default store;

@@ -3,8 +3,12 @@ import style from './header.module.scss';
 
 import { IoNotificationsOutline } from 'react-icons/io5';
 import Logo from '../../assets/images/logo.png';
+import { useSelector } from 'react-redux';
+import { selectLoggedUser } from '../../store/user/user.slice';
 
 function HeaderComponent(): ReactElement {
+  const user = useSelector(selectLoggedUser);
+
   return (
     <header className={style.header + ' bg-dark py-3'}>
       <div className="container d-flex justify-content-between align-items-center">
@@ -24,15 +28,16 @@ function HeaderComponent(): ReactElement {
         <div className={style.header_actions + ' col-6 col-md-4 col-lg-3'}>
           <div className={style.header_actions__avatar}>
             <span className={style.header_actions__avatar_name}>
-              Name of user
+              {user?.name}
             </span>
             <img
               className={style.header_actions__avatar_img}
-              src="https://avatar.iran.liara.run/public/boy"
+              src={user?.avatar}
               alt="User Avatar"
             />
           </div>
-          <button className={style.header_actions__icon + ' btn btn-clear'}>
+          <button
+            className={style.header_actions__icon + ' btn btn-sm btn-clear'}>
             <IoNotificationsOutline />
           </button>
         </div>

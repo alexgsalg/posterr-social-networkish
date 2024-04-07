@@ -1,9 +1,8 @@
 export interface User {
-  userId: string;
-  userName: string;
+  id: string;
+  name: string;
   location: string;
-  profilePicture: string;
-  profileUrl: string;
+  avatar: string;
   following: string[];
   followers: string[];
   posts: string[];
@@ -11,7 +10,7 @@ export interface User {
 }
 
 export interface UserDisplay {
-  userId: string;
-  userName: string;
-  profilePicture: string;
+  id: string;
+  name: string;
+  avatar: string;
 }

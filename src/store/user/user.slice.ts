@@ -1,23 +1,23 @@
 import {
+  PayloadAction,
   SerializedError,
   asyncThunkCreator,
   buildCreateSlice,
 } from '@reduxjs/toolkit';
-import { StoreStatus } from '../store.model';
+import { User } from '../../models/user.model';
+import api from '../../api/axios';
 
 export interface UserState {
-  users: [];
-  currentUser: string | undefined;
-  currentRequestId: string | undefined;
-  status: StoreStatus;
-  error: SerializedError | string | null;
+  users: User[];
+  loggedUser: User | undefined;
+  isLoading: boolean;
+  error: SerializedError | string | null | undefined;
 }
 
 export const initialState: UserState = {
   users: [],
-  currentUser: undefined,
-  currentRequestId: undefined,
-  status: 'idle',
+  loggedUser: undefined,
+  isLoading: false,
   error: null,
 };
 
@@ -29,66 +29,48 @@ const usersSlice = createSliceWithThunks({
   name: 'users',
   initialState,
   reducers: (create) => ({
-    // fetchUser: create.asyncThunk(
-    //   async (userTitle: string, thunkAPI) => {
-    //     try {
-    //       const response: AxiosResponse<any, any> = await axios.get(
-    //         `${BASE_URL}&plot=full&t=${userTitle}`,
-    //       );
-    //       if (response.data.Response === 'False') {
-    //         return thunkAPI.rejectWithValue(response.data.Error);
-    //       }
-    //       return response.data;
-    //     } catch (error: any) {
-    //       return thunkAPI.rejectWithValue(error);
-    //     }
-    //   },
-    //   {
-    //     pending: (state, action) => {
-    //       if (state.status === 'idle') {
-    //         state.status = 'pending';
-    //         state.currentRequestId = action.meta.requestId;
-    //       }
-    //     },
-    //     rejected: (state, action) => {
-    //       const { requestId } = action.meta;
-    //       if (action.error.message === 'Rejected')
-    //         if (
-    //           action.error.message === 'Rejected' ||
-    //           (state.status === 'pending' && state.currentRequestId === requestId)
-    //         ) {
-    //           state.status = 'idle';
-    //           state.error = action.payload as string;
-    //           state.currentRequestId = undefined;
-    //         }
-    //     },
-    //     fulfilled: (state, action) => {
-    //       const { requestId } = action.meta;
-    //       if (state.status === 'pending' && state.currentRequestId === requestId) {
-    //         state.status = 'idle';
-    //         const isStored =
-    //           state.users.some((m) => {
-    //             return m.Title.toLowerCase() === action.payload.Title.toLowerCase();
-    //           }) || undefined;
-    //         if (!isStored && action.payload.imdbID) state.users.push(action.payload);
-    //         state.error = null;
-    //         state.currentRequestId = undefined;
-    //       }
-    //     },
-    //   },
-    // ),
-    resetUsers: create.reducer<void>((state) => {
-      state.users = [];
+    setUsers: create.reducer<User[]>((state, action: PayloadAction<User[]>) => {
+      state.users = action.payload;
+    }),
+    updateUser: create.asyncThunk(
+      async (user: User) => {
+        const response = await api.post(`/user/${user.id}`, user);
+        return response.data;
+      },
+      {
+        pending: (state) => {
+          state.isLoading = true;
+        },
+        rejected: (state, action) => {
+          state.isLoading = false;
+          state.error = action.error;
+        },
+        fulfilled: (state, action) => {
+          const idx = state.users.findIndex(
+            (user) => user.id === action.payload.id,
+          );
+          state.isLoading = false;
+          state.users[idx] = action.payload;
+        },
+      },
+    ),
+    logInUser: create.reducer<User>((state, action: PayloadAction<User>) => {
+      state.loggedUser = action.payload;
     }),
   }),
   selectors: {
     selectUsers: (sliceState) => sliceState.users,
-    selectUserStatus: (sliceState) => sliceState.status,
+    selectLoggedUser: (sliceState) => sliceState.loggedUser,
+    selectUserLoading: (sliceState) => sliceState.isLoading,
     selectUsersError: (sliceState) => sliceState.error,
   },
 });
 
-// export const { fetchUser, resetUsers } = usersSlice.actions;
-export const { selectUsers, selectUserStatus, selectUsersError } =
-  usersSlice.selectors;
+export const { setUsers, updateUser, logInUser } = usersSlice.actions;
+export const {
+  selectUsers,
+  selectUserLoading,
+  selectUsersError,
+  selectLoggedUser,
+} = usersSlice.selectors;
 export default usersSlice.reducer;

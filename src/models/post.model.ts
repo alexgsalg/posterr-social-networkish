@@ -1,13 +1,15 @@
-import { UserDisplay } from './user.model';
-
 export interface Post {
-  postId: string;
-  user: UserDisplay;
-  targetUser: string;
+  id: string;
+  user: string;
+  targetUser: string | null;
   content: string;
   likes: string[];
   createdAt: string;
   comments: Post[];
-  isRepost: boolean;
-  repostFrom?: UserDisplay | null;
+  repost: Repost | null;
+}
+
+export interface Repost {
+  postId: string;
+  userId: string;
 }
