@@ -1,10 +1,12 @@
+import { useEffect } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+
 import HeaderComponent from './components/Header/header.component';
 import HomePage from './views/Home/home.page.tsx';
 import UserPage from './views/User/user.page.tsx';
 import { useAppDispatch } from './store/store.ts';
 import { setUsers, logInUser } from './store/user/user.slice.ts';
-import { useEffect } from 'react';
+import { setPosts } from './store/post/post.slice.ts';
 import api from './api/axios';
 
 function App() {
@@ -14,14 +16,22 @@ function App() {
 
   useEffect(() => {
     initUsers();
+    initPosts();
   });
 
   const initUsers = async () => {
     const response = await api.get('/user');
     const users = response.data;
-    await dispatch(setUsers(users));
+    dispatch(setUsers(users));
     dispatch(logInUser(users[0]));
   };
+
+  const initPosts = async () => {
+    const response = await api.get('/post');
+    const posts = response.data;
+    dispatch(setPosts(posts));
+  };
+
   return (
     <>
       <HeaderComponent />

@@ -32,6 +32,7 @@ const usersSlice = createSliceWithThunks({
     setUsers: create.reducer<User[]>((state, action: PayloadAction<User[]>) => {
       state.users = action.payload;
     }),
+    // TODO: refactor this
     updateUser: create.asyncThunk(
       async (user: User) => {
         const response = await api.post(`/user/${user.id}`, user);
@@ -61,6 +62,9 @@ const usersSlice = createSliceWithThunks({
   selectors: {
     selectUsers: (sliceState) => sliceState.users,
     selectLoggedUser: (sliceState) => sliceState.loggedUser,
+    selectUserById: (sliceState, id: string): User | undefined => {
+      return sliceState.users.find((el) => el.id === id) || undefined;
+    },
     selectUserLoading: (sliceState) => sliceState.isLoading,
     selectUsersError: (sliceState) => sliceState.error,
   },

@@ -35,7 +35,7 @@ function HomePage(): ReactElement {
   return (
     <>
       <section className={style.home + ' px-2 py-4'}>
-        <div className={style.home_container + ' row container-fluid mx-0'}>
+        <div className={style.home_container + ' row container-fluid mx-auto'}>
           <div className={' col-12 col-md-4 col-lg-4'}>
             <UserCard user={loggedUser} />
           </div>
