@@ -39,8 +39,8 @@ function UserCard({ user }: IUserCard): ReactElement {
             <h1 className={style.card_body__name + ' text-light fw-medium'}>
               {user?.name}
             </h1>
-            <p className={style.card_body__location + ' text-secondary'}>
-              <IoLocationOutline className="text-primary" />
+            <p className={style.card_body__location + ' text-light'}>
+              <IoLocationOutline className="text-secondary me-1" />
               {user?.location}
             </p>
           </div>

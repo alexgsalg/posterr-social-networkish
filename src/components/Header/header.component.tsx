@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import style from './header.module.scss';
 
-import { IoNotificationsOutline } from 'react-icons/io5';
+import { IoNotificationsOutline, IoMailOutline } from 'react-icons/io5';
 import Logo from '../../assets/images/logo.png';
 import { useSelector } from 'react-redux';
 import { selectLoggedUser } from '../../store/user/user.slice';
@@ -26,7 +26,10 @@ function HeaderComponent(): ReactElement {
         </div>
 
         <div className={style.header_actions + ' col-6 col-md-4 col-lg-3'}>
-          <div className={style.header_actions__avatar}>
+          <div
+            className={
+              style.header_actions__avatar + ' border-end border-secondary pe-3'
+            }>
             <span className={style.header_actions__avatar_name}>
               {user?.name}
             </span>
@@ -39,6 +42,10 @@ function HeaderComponent(): ReactElement {
           <button
             className={style.header_actions__icon + ' btn btn-sm btn-clear'}>
             <IoNotificationsOutline />
+          </button>
+          <button
+            className={style.header_actions__icon + ' btn btn-sm btn-clear'}>
+            <IoMailOutline />
           </button>
         </div>
       </div>
