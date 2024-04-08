@@ -14,7 +14,7 @@ function UserPage(): ReactElement {
     <div
       className="modal show"
       style={{ display: 'block', position: 'initial' }}>
-      <Modal show={true}>
+      <Modal show={true} size="lg" centered onHide={() => navigate(-1)}>
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
