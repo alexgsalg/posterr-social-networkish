@@ -6,7 +6,6 @@ import {
 } from '@reduxjs/toolkit';
 import { Post } from '../../models/post.model';
 import axios, { AxiosError } from 'axios';
-import { User } from '../../models/user.model';
 
 export interface PostState {
   posts: Post[];
@@ -25,7 +24,7 @@ export const createSliceWithThunks = buildCreateSlice({
 });
 
 const postsSlice = createSliceWithThunks({
-  name: 'post',
+  name: 'posts',
   initialState,
   reducers: (create) => ({
     setPosts: create.reducer<Post[]>((state, action: PayloadAction<Post[]>) => {
@@ -53,13 +52,7 @@ const postsSlice = createSliceWithThunks({
     ),
   }),
   selectors: {
-    selectPosts: (sliceState) => sliceState.posts,
-    selectPostByUser: (sliceState, userId: string): Post[] => {
-      return sliceState.posts.filter((el) => el.user === userId) || [];
-    },
-    selectFollowingPost: (sliceState, ids: string[]): Post[] => {
-      return sliceState.posts.filter((el) => ids.includes(el.user)) || [];
-    },
+    selectPosts: (sliceState) => sliceState.posts || [],
     selectPostLoading: (sliceState) => sliceState.isLoading || false,
     selectPostsError: (sliceState) => sliceState.error || null,
   },
@@ -67,11 +60,6 @@ const postsSlice = createSliceWithThunks({
 
 export const { setPosts, updatePost, postLoading, postError } =
   postsSlice.actions;
-export const {
-  selectPosts,
-  selectPostByUser,
-  selectFollowingPost,
-  selectPostLoading,
-  selectPostsError,
-} = postsSlice.selectors;
+export const { selectPosts, selectPostLoading, selectPostsError } =
+  postsSlice.selectors;
 export default postsSlice.reducer;

@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -8,29 +8,11 @@ import { User } from '../../models/user.model';
 import style from './home.module.scss';
 import FeedFilter from '../../components/FeedFilter/feed-filter.component';
 import Feed from '../../components/Feed/feed.component';
-import { Post } from '../../models/post.model';
 
 function HomePage(): ReactElement {
   const location = useLocation();
   const urlPath = location.pathname;
   const loggedUser = useSelector(selectLoggedUser) as User;
-
-  const [showFollowingPosts, setShowFollowingPosts] = useState<boolean>(false);
-  const [isloadingFeed, setIsloadingFeed] = useState<boolean>(false);
-  const [posts, setPosts] = useState<Post[]>([]);
-
-  // TODO: create hook to fetch posts from api and store it
-
-  // TODO: create hook to filter posts by showFollowingPosts
-
-  useEffect(() => {
-    setIsloadingFeed(true);
-    if (urlPath === '/all') setShowFollowingPosts(false);
-    else if (urlPath === '/following') setShowFollowingPosts(true);
-    else setShowFollowingPosts(false);
-
-    setIsloadingFeed(false);
-  }, [urlPath]);
 
   return (
     <>
@@ -42,7 +24,7 @@ function HomePage(): ReactElement {
 
           <div className={' col-12 col-md-8 col-lg-8'}>
             <FeedFilter />
-            <Feed posts={posts} loadingFeed={isloadingFeed} />
+            <Feed path={urlPath} loggedUser={loggedUser} />
           </div>
         </div>
       </section>

@@ -84,7 +84,7 @@ function UserCard({ user }: IUserCard): ReactElement {
             <div className="text-center">
               <Link
                 className="btn btn-clear text-light"
-                to="/user/1223"
+                to={`/user/${user.id}`}
                 state={{ background: location }}>
                 View profile
               </Link>
