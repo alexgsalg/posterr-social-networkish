@@ -4,6 +4,8 @@ import {
   asyncThunkCreator,
   buildCreateSlice,
 } from '@reduxjs/toolkit';
+import { createSelector } from 'reselect';
+
 import { User } from '../../models/user.model';
 import api from '../../api/axios';
 
@@ -62,9 +64,6 @@ const usersSlice = createSliceWithThunks({
   selectors: {
     selectUsers: (sliceState) => sliceState.users,
     selectLoggedUser: (sliceState) => sliceState.loggedUser,
-    selectUserById: (sliceState, id: string): User | undefined => {
-      return sliceState.users.find((el) => el.id === id) || undefined;
-    },
     selectUserLoading: (sliceState) => sliceState.isLoading,
     selectUsersError: (sliceState) => sliceState.error,
   },
