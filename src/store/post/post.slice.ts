@@ -37,18 +37,23 @@ const postsSlice = createSliceWithThunks({
   reducers: (create) => ({
     // Posts
     setPosts: create.reducer<Post[]>((state, action: PayloadAction<Post[]>) => {
-      state.posts = action.payload
-        .filter((post) => !post.isComment)
-        .sort((a, b) => {
-          const postA = new Date(a.createdAt).getTime();
-          const postB = new Date(b.createdAt).getTime();
-          return postB - postA;
-        });
+      const posts = action.payload.sort((a, b) => {
+        const postA = new Date(a.createdAt).getTime();
+        const postB = new Date(b.createdAt).getTime();
+        return postB - postA;
+      });
+
+      state.posts = posts;
       state.comments = action.payload.filter((post) => post.isComment);
     }),
     addPost: create.reducer<Post>((state, action: PayloadAction<Post>) => {
       if (handleQuota()) {
         state.posts.push(action.payload);
+        state.posts.sort((a, b) => {
+          const postA = new Date(a.createdAt).getTime();
+          const postB = new Date(b.createdAt).getTime();
+          return postB - postA;
+        });
         state.dailyPosts++;
       }
     }),

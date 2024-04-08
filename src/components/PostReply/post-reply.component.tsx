@@ -138,6 +138,7 @@ function PostReply({ type, repostTarget, targetId }: IPostReply): ReactElement {
         <textarea
           className={style.post_reply__input + ' rounded'}
           name="reply"
+          maxLength={777}
           disabled={dailyQuota === 5}
           placeholder={
             dailyQuota === 5

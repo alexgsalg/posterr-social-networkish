@@ -29,7 +29,6 @@ function PostCard({ post }: IPostCard): ReactElement {
   const loggedUser = useSelector(selectLoggedUser);
   const [isliked, setIsLiked] = useState<boolean>(false);
   const [isCommentBox, setIsCommentBox] = useState<boolean>(true);
-  const [currentPost, setCurrentPost] = useState<Post>(post);
 
   const postUser = useFindUser(post.user);
   const postTargetUser = useFindUser(post.targetUser);
@@ -45,7 +44,7 @@ function PostCard({ post }: IPostCard): ReactElement {
   const onLikeAction = async () => {
     if (!postUser || !post) return;
 
-    const updatedPost = currentPost;
+    const updatedPost = post;
     if (isliked) {
       updatedPost.likes = updatedPost.likes.filter(
         (likes: string) => likes !== postUser?.id,
@@ -55,8 +54,8 @@ function PostCard({ post }: IPostCard): ReactElement {
       updatedPost.likes.push(postUser?.id);
       setIsLiked(true);
     }
-    setCurrentPost(updatedPost);
-    await PostService.updatePost(currentPost)
+    // setCurrentPost(updatedPost);
+    await PostService.updatePost(updatedPost)
       .then((post) => {
         dispatch(updatePost(post));
       })
@@ -102,7 +101,7 @@ function PostCard({ post }: IPostCard): ReactElement {
               </div>
               <small
                 className={style.post_header__timestamp + ' text-secondary'}>
-                {formatDistance(new Date(currentPost!.createdAt), new Date(), {
+                {formatDistance(new Date(post!.createdAt), new Date(), {
                   addSuffix: true,
                 })}
               </small>
@@ -111,8 +110,8 @@ function PostCard({ post }: IPostCard): ReactElement {
         )}
 
         <div className={style.post_body}>
-          {currentPost?.content ? (
-            <p className="text-light my-3">{currentPost?.content}</p>
+          {post?.content ? (
+            <p className="text-light my-3">{post?.content}</p>
           ) : null}
 
           {/* Repost */}
@@ -139,12 +138,12 @@ function PostCard({ post }: IPostCard): ReactElement {
             <button
               className={`${style.post_footer_counter} ${liked ? style.active : ''}`}
               onClick={onLikeAction}>
-              <IoHeartOutline aria-hidden="true" /> {currentPost?.likes?.length}
+              <IoHeartOutline aria-hidden="true" /> {post?.likes?.length}
             </button>
           )}
           <button className={style.post_footer_counter} onClick={onLikeAction}>
             <IoChatbubbleEllipsesOutline aria-hidden="true" />{' '}
-            {currentPost?.comments?.length}
+            {post?.comments?.length}
           </button>
 
           <div className={style.post_footer_box}>
