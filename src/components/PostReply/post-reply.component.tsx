@@ -23,15 +23,17 @@ import { useFindPost } from '../../hooks/useFindPost';
 
 interface IPostReply {
   type: 'comment' | 'repost' | undefined;
-  postToRepost?: Post;
+  repostTarget?: Post;
   targetId?: string;
 }
 
 /**
  * Box to white a comment on a post
+ * @param type - The type of the reply
  * @param targetId - The id of the target post
+ * @param repostTarget - The post that wil be reposted on the logged user feed
  */
-function PostReply({ type, postToRepost, targetId }: IPostReply): ReactElement {
+function PostReply({ type, repostTarget, targetId }: IPostReply): ReactElement {
   const { pathname } = useLocation();
   const dispatch = useAppDispatch();
 
@@ -91,9 +93,9 @@ function PostReply({ type, postToRepost, targetId }: IPostReply): ReactElement {
   };
 
   const onRepost = async () => {
-    if (!postToRepost || !loggedUser) return;
+    if (!repostTarget || !loggedUser) return;
 
-    const newRepost = createRepost(message, postToRepost, loggedUser.id);
+    const newRepost = createRepost(message, repostTarget, loggedUser.id);
     let newPostId: string = '';
 
     await PostService.addPost(newRepost)

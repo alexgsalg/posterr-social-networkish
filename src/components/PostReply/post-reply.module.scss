@@ -58,7 +58,7 @@
 }
 %btn {
   width: 100%;
-  transition: all 195ms linear;
+  transition: all 195ms ease;
 
   &:disabled {
     border-color: transparent !important;

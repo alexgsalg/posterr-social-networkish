@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 
 import style from './comment.module.scss';
 import { useFindUser } from '../../hooks/useFindUser';
@@ -21,8 +21,15 @@ function Comment({ commentId }: IComment): ReactElement {
   const loggedUser = useSelector(selectLoggedUser);
   const comment = useFindComment(commentId);
   const commentUser = useFindUser(comment?.user);
+  const [loadingComment, setLoadingComment] = useState(true);
   const isAuthor = loggedUser?.posts.some((post) => post === commentId);
 
+  useEffect(() => {
+    if (comment || commentUser) setLoadingComment(false);
+    else setLoadingComment(true);
+  }, [comment, commentUser]);
+
+  if (loadingComment) return <></>;
   return (
     <article className={style.comment}>
       <header

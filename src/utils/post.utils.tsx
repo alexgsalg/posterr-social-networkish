@@ -1,6 +1,19 @@
 import { isSameDay } from 'date-fns';
 import { Post } from '../models/post.model';
 
+/**
+ * Sort the posts by date and descending
+ * @param posts array
+ * @returns Sorted posts
+ */
+export const sortPots = (posts: Post[]): Post[] => {
+  return posts.sort((a, b) => {
+    const postA = new Date(a.createdAt).getTime();
+    const postB = new Date(b.createdAt).getTime();
+    return postB - postA;
+  });
+};
+
 export const createPost = (
   msg: string,
   userId: string,

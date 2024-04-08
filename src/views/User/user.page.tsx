@@ -8,8 +8,7 @@ import { useLocation } from 'react-router-dom';
 
 function UserPage(): ReactElement {
   const navigate = useNavigate();
-  const location = useLocation();
-  const urlPath = location.pathname;
+  const { pathname } = useLocation();
 
   return (
     <div
@@ -21,7 +20,7 @@ function UserPage(): ReactElement {
         </Modal.Header>
         <Modal.Body>
           <p>Woohoo, you are reading this text in a modal!</p>
-          <Feed path={urlPath} />
+          <Feed path={pathname} />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => navigate(-1)}>

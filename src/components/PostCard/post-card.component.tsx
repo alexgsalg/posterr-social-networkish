@@ -11,16 +11,10 @@ import { Post } from '../../models/post.model';
 import style from './post-card.module.scss';
 import { useFindUser } from '../../hooks/useFindUser';
 import Comment from '../Comment/comment.component';
-import {
-  selectLoggedUser,
-  updateLoggedUser,
-} from '../../store/user/user.slice';
+import { selectLoggedUser } from '../../store/user/user.slice';
 import PostService from '../../api/post.api';
-import UserService from '../../api/user.api';
 import { useAppDispatch } from '../../store/store';
-import { addPost, updatePost } from '../../store/post/post.slice';
-import { createRepost } from '../../utils/post.utils';
-import { User } from '../../models/user.model';
+import { updatePost } from '../../store/post/post.slice';
 import { Link, useLocation } from 'react-router-dom';
 import PostReply from '../PostReply/post-reply.component';
 
@@ -176,7 +170,7 @@ function PostCard({ post }: IPostCard): ReactElement {
       <PostReply
         targetId={post.id}
         type={isCommentBox ? 'comment' : 'repost'}
-        postToRepost={post}
+        repostTarget={post}
       />
 
       {/* Comment */}

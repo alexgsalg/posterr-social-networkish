@@ -1,0 +1,38 @@
+.activity {
+  border: 1px solid var(--clr-posterr-300);
+  border-radius: 0.5rem;
+  &__text {
+    min-height: 70px;
+    width: 100%;
+    margin-bottom: 8px;
+    background-color: transparent !important;
+    border: transparent;
+    color: var(--bs-light);
+    caret-color: var(--clr-posterr-100);
+    resize: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__counter {
+    display: block;
+  }
+
+  &__btn {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: var(--clr-posterr-100) !important;
+    color: var(--clr-posterr-500) !important;
+    transition: all 195ms ease;
+    cursor: pointer !important;
+
+    &:hover {
+      background-color: var(--clr-posterr-300) !important;
+      color: var(--clr-posterr-700) !important;
+    }
+  }
+}

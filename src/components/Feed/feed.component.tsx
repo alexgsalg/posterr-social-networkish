@@ -6,6 +6,8 @@ import { User } from '../../models/user.model';
 import style from './feed.module.scss';
 import PostCard from '../PostCard/post-card.component';
 import { selectLoggedUser } from '../../store/user/user.slice';
+import { getUserIdFromPath } from '../../utils/path.utils';
+import { sortPots } from '../../utils/post.utils';
 
 interface IFeed {
   path: string;
@@ -35,7 +37,7 @@ function Feed({ path }: IFeed): ReactElement {
       allPosts.filter((el) => {
         return loggedUser?.following.includes(el.user);
       }) || [];
-    setPosts(allFollowing);
+    setPosts(sortPots(allFollowing));
   };
 
   const filterByUser = () => {
@@ -45,7 +47,7 @@ function Feed({ path }: IFeed): ReactElement {
       allPosts.filter((el) => {
         return el.user === userId;
       }) || [];
-    setPosts(filtered);
+    setPosts(sortPots(filtered));
   };
 
   /** Loading state */

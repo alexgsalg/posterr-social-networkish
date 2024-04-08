@@ -8,10 +8,10 @@ import { User } from '../../models/user.model';
 import style from './home.module.scss';
 import FeedFilter from '../../components/FeedFilter/feed-filter.component';
 import Feed from '../../components/Feed/feed.component';
+import ActivityBox from '../../components/ActivityBox/activity-box.component';
 
 function HomePage(): ReactElement {
-  const location = useLocation();
-  const urlPath = location.pathname;
+  const { pathname } = useLocation();
 
   return (
     <>
@@ -23,7 +23,8 @@ function HomePage(): ReactElement {
 
           <div className={' col-12 col-md-8 col-lg-9'}>
             <FeedFilter />
-            <Feed path={urlPath} />
+            {pathname === '/all' ? <ActivityBox /> : null}
+            <Feed path={pathname} />
           </div>
         </div>
       </section>
