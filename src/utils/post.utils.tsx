@@ -18,12 +18,12 @@ export const createPost = (
   };
 };
 
-export const createRepost = (post: Post, userId: string): Post => {
+export const createRepost = (msg: string, post: Post, userId: string): Post => {
   return {
     id: '',
     user: userId,
     targetUser: null,
-    content: post.content,
+    content: msg,
     likes: [],
     createdAt: new Date().toISOString(),
     comments: [],
@@ -31,6 +31,7 @@ export const createRepost = (post: Post, userId: string): Post => {
     repost: {
       postId: post.id,
       userId: post.user,
+      content: post.content,
     },
   };
 };

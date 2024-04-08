@@ -1,4 +1,6 @@
 .comment {
+  border-top: 1px solid var(--clr-gray-400);
+  padding: 1rem 1rem 1rem 2rem;
   &__link {
     transition: color 195ms ease;
     &:hover {

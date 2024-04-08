@@ -34,6 +34,7 @@ function PostCard({ post }: IPostCard): ReactElement {
   const dispatch = useAppDispatch();
   const loggedUser = useSelector(selectLoggedUser);
   const [isliked, setIsLiked] = useState<boolean>(false);
+  const [isCommentBox, setIsCommentBox] = useState<boolean>(true);
   const [currentPost, setCurrentPost] = useState<Post>(post);
 
   const postUser = useFindUser(post.user);
@@ -66,32 +67,6 @@ function PostCard({ post }: IPostCard): ReactElement {
         dispatch(updatePost(post));
       })
       .catch((err) => console.log('error', err));
-  };
-
-  const onRepost = async () => {
-    if (!postUser || !post || !loggedUser) return;
-
-    const newRepost = createRepost(post, loggedUser.id);
-    const userClone: User = JSON.parse(JSON.stringify(loggedUser));
-    let newPostId: string = '';
-
-    await PostService.addPost(newRepost)
-      .then((post: Post) => {
-        dispatch(addPost(post));
-        newPostId = post.id;
-      })
-      .catch((err) => console.log('error', err));
-
-    if (newPostId) {
-      userClone.posts.push(newPostId);
-      const userUpdated = userClone;
-
-      await UserService.updateUser(userUpdated)
-        .then((user: User) => {
-          dispatch(updateLoggedUser(user));
-        })
-        .catch((err) => console.log('error', err));
-    }
   };
 
   return (
@@ -141,46 +116,68 @@ function PostCard({ post }: IPostCard): ReactElement {
           </header>
         )}
 
-        <div className={post.repost ? style.post_body_repost : style.post_body}>
+        <div className={style.post_body}>
+          {currentPost?.content ? (
+            <p className="text-light my-3">{currentPost?.content}</p>
+          ) : null}
+
+          {/* Repost */}
           {post.repost && (
-            <div className="d-flex align-items-center gap-2">
-              <img
-                src={repostTargetUser?.avatar}
-                className={style.post_body_repost__image}
-                alt="user photo"
-                aria-hidden="true"
-              />
-              <small className={style.post_body_repost__name}>
-                {repostTargetUser?.name} - Repost
-              </small>
-            </div>
+            <article className={style.post_body_repost}>
+              <div className="d-flex align-items-center gap-2">
+                <img
+                  src={repostTargetUser?.avatar}
+                  className={style.post_body_repost__image}
+                  alt="user photo"
+                  aria-hidden="true"
+                />
+                <small className={style.post_body_repost__name}>
+                  {repostTargetUser?.name} - Repost
+                </small>
+              </div>
+              <p className="text-light mt-3 mb-2">{post.repost.content}</p>
+            </article>
           )}
-          <p className="text-light my-3">{currentPost?.content}</p>
         </div>
 
         <footer className={style.post_footer}>
-          <button className={style.post_footer_box + ' p-1 pe-none'}>
-            <IoChatbubbleEllipsesOutline aria-hidden="true" />
-            {currentPost?.comments?.length}
-          </button>
           {!isAuthor && (
             <button
-              className={
-                style.post_footer_box + ' me-1 p-1' + (liked ? ' active' : '')
-              }
+              className={`${style.post_footer_counter} ${liked ? style.active : ''}`}
               onClick={onLikeAction}>
               <IoHeartOutline aria-hidden="true" /> {currentPost?.likes?.length}
             </button>
           )}
-          {!isAuthor && (
+          <button className={style.post_footer_counter} onClick={onLikeAction}>
+            <IoChatbubbleEllipsesOutline aria-hidden="true" />{' '}
+            {currentPost?.comments?.length}
+          </button>
+
+          <div className={style.post_footer_box}>
             <button
-              className={style.post_footer_box + ' p-1'}
-              onClick={onRepost}>
-              <IoRepeatOutline aria-hidden="true" />
+              className={`${style.post_footer_box__btn} ${isCommentBox ? style.active : ''}`}
+              onClick={() => setIsCommentBox(true)}>
+              <IoChatbubbleEllipsesOutline aria-hidden="true" />
+              Comment
             </button>
-          )}
+            {!isAuthor && (
+              <button
+                className={`${style.post_footer_box__btn} ${!isCommentBox ? style.active : ''}`}
+                onClick={() => setIsCommentBox(false)}>
+                <IoRepeatOutline aria-hidden="true" />
+                Repost
+              </button>
+            )}
+          </div>
         </footer>
       </div>
+
+      {/* White a comment */}
+      <PostReply
+        targetId={post.id}
+        type={isCommentBox ? 'comment' : 'repost'}
+        postToRepost={post}
+      />
 
       {/* Comment */}
       {post.comments.length > 0 && (
@@ -190,9 +187,6 @@ function PostCard({ post }: IPostCard): ReactElement {
           ))}
         </div>
       )}
-
-      {/* White a comment */}
-      <PostReply targetId={post.id} />
     </article>
   );
 }

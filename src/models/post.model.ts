@@ -13,4 +13,5 @@ export interface Post {
 export interface Repost {
   postId: string;
   userId: string;
+  content: string;
 }

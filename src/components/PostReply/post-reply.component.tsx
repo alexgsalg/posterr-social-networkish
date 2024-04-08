@@ -12,11 +12,13 @@ import {
   selectLoggedUser,
   updateLoggedUser,
 } from '../../store/user/user.slice';
-import { createPost } from '../../utils/post.utils';
+import { createPost, createRepost } from '../../utils/post.utils';
 import { useLocation } from 'react-router-dom';
 import { useFindPost } from '../../hooks/useFindPost';
 
 interface IPostReply {
+  type: 'comment' | 'repost' | undefined;
+  postToRepost?: Post;
   targetId?: string;
 }
 
@@ -24,7 +26,7 @@ interface IPostReply {
  * Box to white a comment on a post
  * @param targetId - The id of the target post
  */
-function PostReply({ targetId }: IPostReply): ReactElement {
+function PostReply({ type, postToRepost, targetId }: IPostReply): ReactElement {
   const { pathname } = useLocation();
   const dispatch = useAppDispatch();
 
@@ -35,7 +37,7 @@ function PostReply({ targetId }: IPostReply): ReactElement {
 
   useEffect(() => {
     resetComponent();
-  }, [pathname]);
+  }, [pathname, type]);
 
   const resetComponent = () => {
     setMessage('');
@@ -82,6 +84,24 @@ function PostReply({ targetId }: IPostReply): ReactElement {
     resetComponent();
   };
 
+  const onRepost = async () => {
+    if (!postToRepost || !loggedUser) return;
+
+    const newRepost = createRepost(message, postToRepost, loggedUser.id);
+    let newPostId: string = '';
+
+    await PostService.addPost(newRepost)
+      .then((post: Post) => {
+        dispatch(addPost(post));
+        newPostId = post.id;
+      })
+      .catch((err) => console.log('error', err));
+
+    if (newPostId) {
+      updateLoggedUserPostList(newPostId);
+    }
+  };
+
   const updateTargetPost = async (newReplyId: string) => {
     const targetClone: Post = JSON.parse(JSON.stringify(targetPost));
     targetClone.comments.push(newReplyId);
@@ -116,13 +136,22 @@ function PostReply({ targetId }: IPostReply): ReactElement {
         <small className={style.post_reply__counter}>{charCount}/777</small>
       </div>
       <div className="col-3 col-lg-2">
-        <button
-          className={style.post_reply__button + ' btn py-2 w-100'}
-          type="button"
-          disabled={message?.length <= 0}
-          onClick={onCommentSubmit}>
-          Reply
-        </button>
+        {type === 'repost' ? (
+          <button
+            className={style.post_reply__btn_repost + ' btn py-2 w-100'}
+            type="button"
+            onClick={onRepost}>
+            Repost
+          </button>
+        ) : (
+          <button
+            className={style.post_reply__btn_comment + ' btn py-2 w-100'}
+            type="button"
+            disabled={message?.length <= 0}
+            onClick={onCommentSubmit}>
+            Comment
+          </button>
+        )}
       </div>
     </form>
   );

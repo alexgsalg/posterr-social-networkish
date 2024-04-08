@@ -30,7 +30,7 @@
     margin: 1.5rem 0;
 
     &_repost {
-      margin: 1.5rem 0;
+      margin-bottom: 1.5rem;
       background: var(--bs-gray-800);
       padding: 1rem;
       border-radius: 0.4rem;
@@ -56,7 +56,7 @@
     align-items: center;
     gap: 0.5rem;
 
-    &_box {
+    &_counter {
       display: flex;
       align-items: center;
       gap: 0.5rem;
@@ -77,10 +77,40 @@
         color: var(--clr-posterr-200);
       }
     }
+
+    &_box {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.5rem;
+
+      &__btn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.25rem 0.5rem;
+        background-color: transparent;
+        border: 1px solid var(--bs-gray-600);
+        border-radius: 0.5rem;
+        color: var(--bs-gray-600);
+        transition: color 195ms ease;
+
+        &:active,
+        &:hover,
+        &.active {
+          outline: none !important;
+          border-color: var(--clr-posterr-200) !important;
+          color: var(--clr-posterr-200);
+        }
+      }
+      & ion-icon {
+        font-size: 1.2rem;
+      }
+    }
   }
 }
 
 .comment_structure {
-  padding: 1rem 1rem 1rem 2rem;
   border-top: 1px solid var(--clr-gray-400);
 }

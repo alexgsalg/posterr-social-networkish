@@ -1,7 +1,6 @@
 import { ReactElement } from 'react';
 
 import style from './comment.module.scss';
-import { Post } from '../../models/post.model';
 import { useFindUser } from '../../hooks/useFindUser';
 import { formatDistance } from 'date-fns';
 import { useSelector } from 'react-redux';
@@ -21,7 +20,6 @@ interface IComment {
 function Comment({ commentId }: IComment): ReactElement {
   const loggedUser = useSelector(selectLoggedUser);
   const comment = useFindComment(commentId);
-  console.log('Comment > comment:', comment);
   const commentUser = useFindUser(comment?.user);
   const isAuthor = loggedUser?.posts.some((post) => post === commentId);
 

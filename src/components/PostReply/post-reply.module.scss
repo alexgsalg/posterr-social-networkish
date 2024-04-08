@@ -28,10 +28,10 @@
     z-index: 10;
   }
 
-  &__button {
+  &__btn_comment {
+    @extend %btn;
     background-color: var(--clr-posterr-300) !important;
     color: var(--bs-light) !important;
-    transition: all 195ms linear;
 
     &:hover {
       background-color: var(--clr-posterr-400) !important;
@@ -40,5 +40,27 @@
     &:disabled {
       border-color: transparent !important;
     }
+  }
+
+  &__btn_repost {
+    @extend %btn;
+    background-color: var(--bs-purple) !important;
+    color: var(--bs-light) !important;
+
+    &:hover {
+      background-color: var(--clr-posterr-200) !important;
+    }
+
+    &:disabled {
+      border-color: transparent !important;
+    }
+  }
+}
+%btn {
+  width: 100%;
+  transition: all 195ms linear;
+
+  &:disabled {
+    border-color: transparent !important;
   }
 }
