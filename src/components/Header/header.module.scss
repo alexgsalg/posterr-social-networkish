@@ -2,6 +2,7 @@
   position: fixed;
   inset: 0 0 auto 0;
   height: var(--header-height);
+  z-index: 100;
 
   &_brand {
     height: 2rem;
