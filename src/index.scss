@@ -20,6 +20,12 @@
   box-sizing: border-box;
 }
 
+a {
+  color: inherit !important;
+  text-decoration: none !important;
+  display: inline-block;
+}
+
 .main-content {
   min-height: 100vh;
   background-color: var(--clr-posterr-700);

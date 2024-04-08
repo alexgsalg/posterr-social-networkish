@@ -3,6 +3,12 @@
     background: var(--clr-gray-600);
   }
 
+  &__link {
+    transition: color 195ms ease;
+    &:hover {
+      color: var(--clr-posterr-200) !important;
+    }
+  }
   &_header {
     &__avatar {
       width: 45px;

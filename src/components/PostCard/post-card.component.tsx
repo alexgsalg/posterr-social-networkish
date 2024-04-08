@@ -21,20 +21,24 @@ import { useAppDispatch } from '../../store/store';
 import { addPost, updatePost } from '../../store/post/post.slice';
 import { createRepost } from '../../utils/post.utils';
 import { User } from '../../models/user.model';
+import { Link, useLocation } from 'react-router-dom';
 
 interface IPostCard {
   post: Post;
 }
 
 function PostCard({ post }: IPostCard): ReactElement {
+  const location = useLocation();
+
   const dispatch = useAppDispatch();
   const loggedUser = useSelector(selectLoggedUser);
+  const [isliked, setIsLiked] = useState<boolean>(false);
+  const [currentPost, setCurrentPost] = useState<Post>(post);
+
   const postUser = useFindUser(post.user);
   const postTargetUser = useFindUser(post.targetUser);
   const repostTargetUser = useFindUser(post.repost?.userId);
   const isAuthor = post.user === loggedUser?.id;
-  const [isliked, setIsLiked] = useState<boolean>(false);
-  const [currentPost, setCurrentPost] = useState<Post>(post);
   const liked = post.likes.some((id) => id === postUser?.id);
 
   useEffect(() => {
@@ -107,11 +111,22 @@ function PostCard({ post }: IPostCard): ReactElement {
                   className={
                     style.post_header__title + ' d-inline-block cursor-pointer'
                   }>
-                  {postUser?.name}
+                  <Link
+                    className={style.post__link}
+                    to={`/user/${post.user}`}
+                    state={{ background: location }}>
+                    {postUser?.name}
+                  </Link>
                 </h3>
                 {post.targetUser && postTargetUser ? (
                   <span>
-                    {' >'} {postTargetUser?.name}
+                    {' > '}
+                    <Link
+                      className={style.post__link}
+                      to={`/user/${postTargetUser.id}`}
+                      state={{ background: location }}>
+                      {postTargetUser?.name}
+                    </Link>
                   </span>
                 ) : null}
               </div>

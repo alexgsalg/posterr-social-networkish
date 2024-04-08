@@ -5,14 +5,15 @@ import { selectPosts } from '../../store/post/post.slice';
 import { User } from '../../models/user.model';
 import style from './feed.module.scss';
 import PostCard from '../PostCard/post-card.component';
+import { selectLoggedUser } from '../../store/user/user.slice';
 
 interface IFeed {
   path: string;
-  loggedUser?: User;
 }
 
-function Feed({ path, loggedUser }: IFeed): ReactElement {
+function Feed({ path }: IFeed): ReactElement {
   const allPosts = useSelector(selectPosts) as Post[];
+  const loggedUser = useSelector(selectLoggedUser);
   const [isloadingFeed, setIsloadingFeed] = useState<boolean>(false);
   const [posts, setPosts] = useState<Post[]>([]);
 
@@ -27,7 +28,7 @@ function Feed({ path, loggedUser }: IFeed): ReactElement {
       filterByUser();
     }
     setIsloadingFeed(false);
-  }, [path]);
+  }, [path, allPosts]);
 
   const filterByFollowing = () => {
     const allFollowing =
