@@ -18,11 +18,11 @@ function HomePage(): ReactElement {
     <>
       <section className={style.home + ' px-2 py-4'}>
         <div className={style.home_container + ' row container-fluid mx-auto'}>
-          <div className={style.home_user + ' col-12 col-md-4 col-lg-4 mb-3'}>
+          <div className={style.home_user + ' col-12 col-md-4 col-lg-3 mb-3'}>
             <UserCard user={loggedUser} />
           </div>
 
-          <div className={' col-12 col-md-8 col-lg-8'}>
+          <div className={' col-12 col-md-8 col-lg-9'}>
             <FeedFilter />
             <Feed path={urlPath} loggedUser={loggedUser} />
           </div>

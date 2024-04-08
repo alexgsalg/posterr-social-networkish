@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { formatDistance } from 'date-fns';
 import {
@@ -12,18 +12,64 @@ import style from './post-card.module.scss';
 import { useFindUser } from '../../hooks/useFindUser';
 import Comment from '../Comment/comment.component';
 import { selectLoggedUser } from '../../store/user/user.slice';
+import ApiService from '../../api/user.api';
+import { useAppDispatch } from '../../store/store';
+import { addPost, updatePost } from '../../store/post/post.slice';
+import { createRepost } from '../../utils/post.utils';
 
 interface IPostCard {
   post: Post;
 }
 
 function PostCard({ post }: IPostCard): ReactElement {
+  const dispatch = useAppDispatch();
   const loggedUser = useSelector(selectLoggedUser);
   const postUser = useFindUser(post.user);
   const postTargetUser = useFindUser(post.targetUser);
   const repostTargetUser = useFindUser(post.repost?.userId);
   const isAuthor = post.user === loggedUser?.id;
+  const [isliked, setIsLiked] = useState<boolean>(false);
+  const [currentPost, setCurrentPost] = useState<Post>(post);
   const liked = post.likes.some((id) => id === postUser?.id);
+
+  useEffect(() => {
+    const liked = post.likes.some((id) => id === postUser?.id);
+    setIsLiked(liked);
+  });
+
+  const onLikeAction = async () => {
+    if (!postUser || !post) return;
+
+    const updatedPost = currentPost;
+    if (isliked) {
+      updatedPost.likes = updatedPost.likes.filter(
+        (likes: string) => likes !== postUser?.id,
+      );
+      setIsLiked(false);
+    } else {
+      updatedPost.likes.push(postUser?.id);
+      setIsLiked(true);
+    }
+    setCurrentPost(updatedPost);
+    await ApiService.updatePost(currentPost)
+      .then((post) => {
+        dispatch(updatePost(post));
+      })
+      .catch((err) => console.log('error', err));
+  };
+
+  const onRepost = async () => {
+    if (!postUser || !post || !loggedUser) return;
+
+    const newRepost = createRepost(post, loggedUser.id);
+    console.log('onRepost > newRepost:', newRepost);
+
+    await ApiService.addPost(newRepost)
+      .then((post) => {
+        dispatch(addPost(post));
+      })
+      .catch((err) => console.log('error', err));
+  };
 
   return (
     <article className={style.post_card + ' rounded shadow-sm'}>
@@ -53,7 +99,7 @@ function PostCard({ post }: IPostCard): ReactElement {
               </div>
               <small
                 className={style.post_header__timestamp + ' text-secondary'}>
-                {formatDistance(new Date(post?.createdAt), new Date(), {
+                {formatDistance(new Date(currentPost!.createdAt), new Date(), {
                   addSuffix: true,
                 })}
               </small>
@@ -76,26 +122,27 @@ function PostCard({ post }: IPostCard): ReactElement {
               </small>
             </div>
           )}
-          <p className="text-light my-3">{post?.content}</p>
+          <p className="text-light my-3">{currentPost?.content}</p>
         </div>
 
         <footer className={style.post_footer}>
           <button className={style.post_footer_box + ' p-1 pe-none'}>
             <IoChatbubbleEllipsesOutline aria-hidden="true" />
-            {post?.comments?.length}
+            {currentPost?.comments?.length}
           </button>
           {!isAuthor && (
             <button
               className={
                 style.post_footer_box + ' me-1 p-1' + (liked ? ' active' : '')
-                // (click)="onLikection()"
-              }>
-              <IoHeartOutline aria-hidden="true" /> {post?.likes?.length}
+              }
+              onClick={onLikeAction}>
+              <IoHeartOutline aria-hidden="true" /> {currentPost?.likes?.length}
             </button>
           )}
           {!isAuthor && (
-            <button className={style.post_footer_box + ' p-1'}>
-              {/* (click)="onRepost()"> */}
+            <button
+              className={style.post_footer_box + ' p-1'}
+              onClick={onRepost}>
               <IoRepeatOutline aria-hidden="true" />
             </button>
           )}

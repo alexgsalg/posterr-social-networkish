@@ -30,6 +30,10 @@ const postsSlice = createSliceWithThunks({
     setPosts: create.reducer<Post[]>((state, action: PayloadAction<Post[]>) => {
       state.posts = action.payload;
     }),
+    addPost: create.reducer<Post[]>((state, action: PayloadAction<Post[]>) => {
+      // @ts-expect-error
+      state.posts.push(action.payload);
+    }),
     updatePost: create.reducer<Post>((state, action: PayloadAction<Post>) => {
       const idx = state.posts.findIndex(
         (user) => user.id === action.payload.id,
@@ -58,7 +62,7 @@ const postsSlice = createSliceWithThunks({
   },
 });
 
-export const { setPosts, updatePost, postLoading, postError } =
+export const { setPosts, addPost, updatePost, postLoading, postError } =
   postsSlice.actions;
 export const { selectPosts, selectPostLoading, selectPostsError } =
   postsSlice.selectors;
