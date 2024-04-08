@@ -1,6 +1,5 @@
 import {
   PayloadAction,
-  SerializedError,
   asyncThunkCreator,
   buildCreateSlice,
 } from '@reduxjs/toolkit';
@@ -9,12 +8,14 @@ import axios, { AxiosError } from 'axios';
 
 export interface PostState {
   posts: Post[];
+  comments: Post[];
   isLoading: boolean;
   error: AxiosError | unknown | string | null | undefined;
 }
 
 export const initialState: PostState = {
   posts: [],
+  comments: [],
   isLoading: false,
   error: null,
 };
@@ -28,10 +29,14 @@ const postsSlice = createSliceWithThunks({
   initialState,
   reducers: (create) => ({
     setPosts: create.reducer<Post[]>((state, action: PayloadAction<Post[]>) => {
-      state.posts = action.payload;
+      state.posts = action.payload.filter((post) => !post.isComment);
+      state.comments = action.payload.filter((post) => post.isComment);
     }),
     addPost: create.reducer<Post>((state, action: PayloadAction<Post>) => {
       state.posts.push(action.payload);
+    }),
+    addComment: create.reducer<Post>((state, action: PayloadAction<Post>) => {
+      state.comments.push(action.payload);
     }),
     updatePost: create.reducer<Post>((state, action: PayloadAction<Post>) => {
       const idx = state.posts.findIndex(
@@ -56,13 +61,24 @@ const postsSlice = createSliceWithThunks({
   }),
   selectors: {
     selectPosts: (sliceState) => sliceState.posts || [],
+    selectComments: (sliceState) => sliceState.comments || [],
     selectPostLoading: (sliceState) => sliceState.isLoading || false,
     selectPostsError: (sliceState) => sliceState.error || null,
   },
 });
 
-export const { setPosts, addPost, updatePost, postLoading, postError } =
-  postsSlice.actions;
-export const { selectPosts, selectPostLoading, selectPostsError } =
-  postsSlice.selectors;
+export const {
+  setPosts,
+  addPost,
+  addComment,
+  updatePost,
+  postLoading,
+  postError,
+} = postsSlice.actions;
+export const {
+  selectPosts,
+  selectPostLoading,
+  selectComments,
+  selectPostsError,
+} = postsSlice.selectors;
 export default postsSlice.reducer;

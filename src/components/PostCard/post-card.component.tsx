@@ -22,6 +22,7 @@ import { addPost, updatePost } from '../../store/post/post.slice';
 import { createRepost } from '../../utils/post.utils';
 import { User } from '../../models/user.model';
 import { Link, useLocation } from 'react-router-dom';
+import PostReply from '../PostReply/post-reply.component';
 
 interface IPostCard {
   post: Post;
@@ -183,33 +184,15 @@ function PostCard({ post }: IPostCard): ReactElement {
 
       {/* Comment */}
       {post.comments.length > 0 && (
-        <div className={style.comment_structure + ' border-top border-1'}>
+        <div className={style.comment_structure}>
           {post.comments.map((comment, idx) => (
-            <Comment key={idx} comment={comment} />
+            <Comment key={idx} commentId={comment} />
           ))}
         </div>
       )}
 
-      {/*// <form className="post_reply d-flex p-3 gap-3 border-top border-1">
-  //   <div className="col">
-  //     <textarea
-  //       className="post_reply__input rounded"
-  //       type="text"
-  //       name="reply"
-  //       placeholder="White a reply"
-  //       [formControl]="replyMsg"
-  //       (keyup)="autoGrowTextZone($event)"></textarea>
-  //   </div>
-  //   <div className="col-3 col-lg-2">
-  //     <button
-  //       className="btn btn-primary py-2 text-white w-100"
-  //       type="button"
-  //       [disabled]="replyMsg.invalid"
-  //       (click)="onComment()">
-  //       Reply
-  //     </button>
-  //   </div>
-  // </form>*/}
+      {/* White a comment */}
+      <PostReply targetId={post.id} />
     </article>
   );
 }

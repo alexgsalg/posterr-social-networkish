@@ -5,7 +5,8 @@ export interface Post {
   content: string;
   likes: string[];
   createdAt: string;
-  comments: Post[];
+  comments: string[];
+  isComment: boolean;
   repost: Repost | null;
 }
 

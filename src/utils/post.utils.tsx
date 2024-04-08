@@ -13,6 +13,7 @@ export const createPost = (
     likes: [],
     createdAt: new Date().toISOString(),
     comments: [],
+    isComment: false,
     repost: null,
   };
 };
@@ -26,6 +27,7 @@ export const createRepost = (post: Post, userId: string): Post => {
     likes: [],
     createdAt: new Date().toISOString(),
     comments: [],
+    isComment: false,
     repost: {
       postId: post.id,
       userId: post.user,

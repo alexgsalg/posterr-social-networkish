@@ -23,6 +23,17 @@ class PostService {
       throw error;
     }
   };
+
+  public addComment = async (comment: Post) => {
+    comment.isComment = true;
+    try {
+      const response = await api.post(`/post`, comment);
+      return response.data;
+    } catch (error) {
+      console.error('Error creating user:', error);
+      throw error;
+    }
+  };
 }
 
 export default new PostService();

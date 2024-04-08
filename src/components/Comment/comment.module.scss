@@ -1,10 +1,18 @@
 .comment {
+  &__link {
+    transition: color 195ms ease;
+    &:hover {
+      color: var(--clr-posterr-200) !important;
+    }
+  }
+
   &_header {
     &__avatar {
       width: 45px;
       aspect-ratio: 1/1;
       object-fit: cover;
       border-radius: 50%;
+      border: 1px solid var(--clr-gray-400);
       overflow: hidden;
     }
 
