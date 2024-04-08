@@ -47,37 +47,37 @@ function UserCard({ user }: IUserCard): ReactElement {
 
           <div className="col-12">
             <div className={'row gy-3 mt-3 mb-4 mx-0'}>
-              <div className="col-6 px-2">
-                <p className={'text-secondary'}>
+              <div className="col-4 col-md-6 col-lg-6 px-2 text-center text-md-start">
+                <small className={'text-secondary'}>
                   <span className={'text-light fw-medium pe-2'}>
                     {user?.followers?.length}
                   </span>
                   Followers
-                </p>
+                </small>
               </div>
-              <div className="col-6 px-2 text-end">
-                <p className={'text-secondary'}>
+              <div className="col-4 col-md-6 col-lg-6 px-2 text-center text-md-end">
+                <small className={'text-secondary'}>
                   <span className={'text-light fw-medium pe-2'}>
                     {user?.following?.length}
                   </span>
                   Following
-                </p>
+                </small>
               </div>
-              <div className="col-4 px-2">
-                <p className={'text-secondary'}>
+              <div className="col-4 col-md-4 col-lg-4 px-2 text-center text-md-start">
+                <small className={'text-secondary'}>
                   <span className={'text-light fw-medium pe-2'}>
                     {user?.posts?.length}
                   </span>
                   Posts
-                </p>
+                </small>
               </div>
-              <div className="col-8 px-2 text-end">
-                <p className={'text-secondary'}>
+              <div className="col-12 col-sm-6 col-md-8 col-lg-8 px-2 text-center text-md-end">
+                <small className={'text-secondary'}>
                   <IoCalendarOutline />
                   <span className={'text-light ps-2'}>
                     {format(user?.createdAt, 'MMMM d, yyyy')}
                   </span>
-                </p>
+                </small>
               </div>
             </div>
 
