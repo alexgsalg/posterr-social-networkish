@@ -15,7 +15,7 @@ function HeaderComponent(): ReactElement {
         <div
           className={
             style.header_brand +
-            ' col-6 col-md-4 col-lg-3 d-flex justify-content-start align-items-center'
+            ' col-2 col-md-4 col-lg-3 d-flex justify-content-start align-items-center'
           }>
           <img
             className={style.header_brand__img}
@@ -25,7 +25,7 @@ function HeaderComponent(): ReactElement {
           <span className={style.header__name}>Posterr</span>
         </div>
 
-        <div className={style.header_actions + ' col-6 col-md-4 col-lg-3'}>
+        <div className={style.header_actions + ' col-10 col-md-4 col-lg-4'}>
           <div
             className={
               style.header_actions__avatar + ' border-end border-secondary pe-3'

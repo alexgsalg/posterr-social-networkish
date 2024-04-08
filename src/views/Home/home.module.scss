@@ -1,6 +1,14 @@
 .home {
   &_container {
+    position: relative;
+    align-items: flex-start;
     max-width: 1200px;
     margin-inline: auto;
+  }
+  &_user {
+    @media screen and (min-width: 768px) {
+      position: sticky;
+      top: 1rem;
+    }
   }
 }
