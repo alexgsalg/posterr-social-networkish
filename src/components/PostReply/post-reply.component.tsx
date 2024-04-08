@@ -6,7 +6,12 @@ import { User } from '../../models/user.model';
 import { Post } from '../../models/post.model';
 import PostService from '../../api/post.api';
 import UserService from '../../api/user.api';
-import { addComment, addPost, updatePost } from '../../store/post/post.slice';
+import {
+  addComment,
+  addPost,
+  selectDailyQuota,
+  updatePost,
+} from '../../store/post/post.slice';
 import { useAppDispatch } from '../../store/store';
 import {
   selectLoggedUser,
@@ -31,6 +36,7 @@ function PostReply({ type, postToRepost, targetId }: IPostReply): ReactElement {
   const dispatch = useAppDispatch();
 
   const loggedUser = useSelector(selectLoggedUser);
+  const dailyQuota = useSelector(selectDailyQuota);
   const targetPost = useFindPost(targetId);
   const [message, setMessage] = useState<string>('');
   const [charCount, setCharCount] = useState<number>(0);
@@ -130,7 +136,12 @@ function PostReply({ type, postToRepost, targetId }: IPostReply): ReactElement {
         <textarea
           className={style.post_reply__input + ' rounded'}
           name="reply"
-          placeholder="White a reply"
+          disabled={dailyQuota === 5}
+          placeholder={
+            dailyQuota === 5
+              ? 'You reached your daily post quota'
+              : 'White a reply'
+          }
           value={message}
           onChange={(ev) => onMessageInput(ev)}></textarea>
         <small className={style.post_reply__counter}>{charCount}/777</small>
@@ -140,6 +151,7 @@ function PostReply({ type, postToRepost, targetId }: IPostReply): ReactElement {
           <button
             className={style.post_reply__btn_repost + ' btn py-2 w-100'}
             type="button"
+            disabled={dailyQuota === 5}
             onClick={onRepost}>
             Repost
           </button>
@@ -147,7 +159,7 @@ function PostReply({ type, postToRepost, targetId }: IPostReply): ReactElement {
           <button
             className={style.post_reply__btn_comment + ' btn py-2 w-100'}
             type="button"
-            disabled={message?.length <= 0}
+            disabled={message?.length <= 0 || dailyQuota === 5}
             onClick={onCommentSubmit}>
             Comment
           </button>
