@@ -5,13 +5,12 @@ import { format } from 'date-fns';
 import { IoLocationOutline, IoCalendarOutline } from 'react-icons/io5';
 import { User } from '../../models/user.model';
 import style from './user-card.module.scss';
+import { useSelector } from 'react-redux';
+import { selectLoggedUser } from '../../store/user/user.slice';
 
-interface IUserCard {
-  user: User;
-}
-
-function UserCard({ user }: IUserCard): ReactElement {
+function UserCard(): ReactElement {
   const location = useLocation();
+  const user = useSelector(selectLoggedUser) as User;
 
   return (
     <article className={style.card + ' pt-md-4 shadow'}>

@@ -30,8 +30,7 @@ const postsSlice = createSliceWithThunks({
     setPosts: create.reducer<Post[]>((state, action: PayloadAction<Post[]>) => {
       state.posts = action.payload;
     }),
-    addPost: create.reducer<Post[]>((state, action: PayloadAction<Post[]>) => {
-      // @ts-expect-error
+    addPost: create.reducer<Post>((state, action: PayloadAction<Post>) => {
       state.posts.push(action.payload);
     }),
     updatePost: create.reducer<Post>((state, action: PayloadAction<Post>) => {

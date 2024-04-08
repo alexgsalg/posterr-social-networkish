@@ -1,4 +1,3 @@
-import { v4 as uuid } from 'uuid';
 import { Post } from '../models/post.model';
 
 export const createPost = (
@@ -7,7 +6,7 @@ export const createPost = (
   target: string | null = null,
 ): Post => {
   return {
-    id: uuid(),
+    id: '',
     user: userId,
     targetUser: target || null,
     content: msg,
@@ -20,7 +19,7 @@ export const createPost = (
 
 export const createRepost = (post: Post, userId: string): Post => {
   return {
-    id: uuid(),
+    id: '',
     user: userId,
     targetUser: null,
     content: post.content,

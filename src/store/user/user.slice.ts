@@ -34,27 +34,13 @@ const usersSlice = createSliceWithThunks({
     setUsers: create.reducer<User[]>((state, action: PayloadAction<User[]>) => {
       state.users = action.payload;
     }),
-    // TODO: refactor this
-    updateUser: create.asyncThunk(
-      async (user: User) => {
-        const response = await api.post(`/user/${user.id}`, user);
-        return response.data;
-      },
-      {
-        pending: (state) => {
-          state.isLoading = true;
-        },
-        rejected: (state, action) => {
-          state.isLoading = false;
-          state.error = action.error;
-        },
-        fulfilled: (state, action) => {
-          const idx = state.users.findIndex(
-            (user) => user.id === action.payload.id,
-          );
-          state.isLoading = false;
-          state.users[idx] = action.payload;
-        },
+    updateLoggedUser: create.reducer<User>(
+      (state, action: PayloadAction<User>) => {
+        const idx = state.users.findIndex(
+          (user) => user.id === action.payload.id,
+        );
+        state.users[idx] = action.payload;
+        state.loggedUser = action.payload;
       },
     ),
     logInUser: create.reducer<User>((state, action: PayloadAction<User>) => {
@@ -69,7 +55,7 @@ const usersSlice = createSliceWithThunks({
   },
 });
 
-export const { setUsers, updateUser, logInUser } = usersSlice.actions;
+export const { setUsers, updateLoggedUser, logInUser } = usersSlice.actions;
 export const {
   selectUsers,
   selectUserLoading,

@@ -11,11 +11,16 @@ import { Post } from '../../models/post.model';
 import style from './post-card.module.scss';
 import { useFindUser } from '../../hooks/useFindUser';
 import Comment from '../Comment/comment.component';
-import { selectLoggedUser } from '../../store/user/user.slice';
-import ApiService from '../../api/user.api';
+import {
+  selectLoggedUser,
+  updateLoggedUser,
+} from '../../store/user/user.slice';
+import PostService from '../../api/post.api';
+import UserService from '../../api/user.api';
 import { useAppDispatch } from '../../store/store';
 import { addPost, updatePost } from '../../store/post/post.slice';
 import { createRepost } from '../../utils/post.utils';
+import { User } from '../../models/user.model';
 
 interface IPostCard {
   post: Post;
@@ -51,7 +56,7 @@ function PostCard({ post }: IPostCard): ReactElement {
       setIsLiked(true);
     }
     setCurrentPost(updatedPost);
-    await ApiService.updatePost(currentPost)
+    await PostService.updatePost(currentPost)
       .then((post) => {
         dispatch(updatePost(post));
       })
@@ -62,13 +67,26 @@ function PostCard({ post }: IPostCard): ReactElement {
     if (!postUser || !post || !loggedUser) return;
 
     const newRepost = createRepost(post, loggedUser.id);
-    console.log('onRepost > newRepost:', newRepost);
+    const userClone: User = JSON.parse(JSON.stringify(loggedUser));
+    let newPostId: string = '';
 
-    await ApiService.addPost(newRepost)
-      .then((post) => {
+    await PostService.addPost(newRepost)
+      .then((post: Post) => {
         dispatch(addPost(post));
+        newPostId = post.id;
       })
       .catch((err) => console.log('error', err));
+
+    if (newPostId) {
+      userClone.posts.push(newPostId);
+      const userUpdated = userClone;
+
+      await UserService.updateUser(userUpdated)
+        .then((user: User) => {
+          dispatch(updateLoggedUser(user));
+        })
+        .catch((err) => console.log('error', err));
+    }
   };
 
   return (

@@ -12,19 +12,18 @@ import Feed from '../../components/Feed/feed.component';
 function HomePage(): ReactElement {
   const location = useLocation();
   const urlPath = location.pathname;
-  const loggedUser = useSelector(selectLoggedUser) as User;
 
   return (
     <>
       <section className={style.home + ' px-2 py-4'}>
         <div className={style.home_container + ' row container-fluid mx-auto'}>
           <div className={style.home_user + ' col-12 col-md-4 col-lg-3 mb-3'}>
-            <UserCard user={loggedUser} />
+            <UserCard />
           </div>
 
           <div className={' col-12 col-md-8 col-lg-9'}>
             <FeedFilter />
-            <Feed path={urlPath} loggedUser={loggedUser} />
+            <Feed path={urlPath} />
           </div>
         </div>
       </section>

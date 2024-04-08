@@ -1,22 +1,12 @@
 import api from './axios';
-import { Post } from '../models/post.model';
+import { User } from '../models/user.model';
 
-class ApiService {
+class UserService {
   constructor() {}
 
-  public updatePost = async (post: Post) => {
+  public updateUser = async (user: User) => {
     try {
-      const response = await api.put(`/post/${post.id}`, post);
-      return response.data;
-    } catch (error) {
-      console.error('Error creating user:', error);
-      throw error;
-    }
-  };
-
-  public addPost = async (post: Post) => {
-    try {
-      const response = await api.post(`/post`, post);
+      const response = await api.put(`/user/${user.id}`, user);
       return response.data;
     } catch (error) {
       console.error('Error creating user:', error);
@@ -25,4 +15,4 @@ class ApiService {
   };
 }
 
-export default new ApiService();
+export default new UserService();
