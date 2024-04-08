@@ -20,13 +20,27 @@
   }
 
   &_body {
-    &__repost_image {
-      width: 25px;
-      aspect-ratio: 1/1;
-      object-fit: cover;
-      border-radius: 50%;
-      overflow: hidden;
-      filter: saturate(0);
+    margin: 1.5rem 0;
+
+    &_repost {
+      margin: 1.5rem 0;
+      background: var(--bs-gray-800);
+      padding: 1rem;
+      border-radius: 0.4rem;
+      display: inline-block;
+
+      &__name {
+        color: var(--bs-gray-400);
+      }
+
+      &__image {
+        width: 25px;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        border-radius: 50%;
+        overflow: hidden;
+        filter: saturate(0);
+      }
     }
   }
 

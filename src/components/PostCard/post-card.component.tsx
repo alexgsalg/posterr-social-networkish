@@ -107,17 +107,16 @@ function PostCard({ post }: IPostCard): ReactElement {
           </header>
         )}
 
-        <div
-          className={style.post_body + 'pt-3 pb-2' + (post.repost && ' ps-2')}>
+        <div className={post.repost ? style.post_body_repost : style.post_body}>
           {post.repost && (
-            <div className="d-flex align-items-center gap-2 mb-2">
+            <div className="d-flex align-items-center gap-2">
               <img
                 src={repostTargetUser?.avatar}
-                className={style.post_body__repost_image}
+                className={style.post_body_repost__image}
                 alt="user photo"
                 aria-hidden="true"
               />
-              <small className="text-muted">
+              <small className={style.post_body_repost__name}>
                 {repostTargetUser?.name} - Repost
               </small>
             </div>
