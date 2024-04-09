@@ -1,29 +1,34 @@
-import { ReactElement, useEffect, useMemo, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import Modal from 'react-bootstrap/Modal';
-import Feed from '../../components/Feed/feed.component';
-import { useLocation } from 'react-router-dom';
-import style from './user.module.scss';
-import { getUserIdFromPath } from '../../utils/path.utils';
 import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import Modal from 'react-bootstrap/Modal';
+
+import style from './user.module.scss';
+import UserService from '../../api/user.api';
+// store
 import {
   selectLoggedUser,
   selectUsers,
   updateLoggedUser,
   updateOneUser,
 } from '../../store/user/user.slice';
+import { useAppDispatch } from '../../store/store';
+// models
 import { User } from '../../models/user.model';
-import UserService from '../../api/user.api';
+// components
+import Feed from '../../components/Feed/feed.component';
+import Button from '../../components/Button/button.component';
+import ActivityBox from '../../components/ActivityBox/activity-box.component';
+// imports
+import { getUserIdFromPath } from '../../utils/path.utils';
 import {
-  IoCalendarOutline,
   IoLocationOutline,
+  IoPerson,
   IoPersonAddOutline,
   IoPersonRemoveOutline,
 } from 'react-icons/io5';
 import { format } from 'date-fns';
-import Button from '../../components/Button/button.component';
-import { useAppDispatch } from '../../store/store';
-import ActivityBox from '../../components/ActivityBox/activity-box.component';
 
 function UserPage(): ReactElement {
   const navigate = useNavigate();
@@ -226,7 +231,7 @@ function UserPage(): ReactElement {
 
                 <div className="col-auto">
                   <small className={style.user_header__detail}>
-                    <IoCalendarOutline />
+                    <IoPerson />
                     <span className={'ps-2'}>
                       {format(user!.createdAt, 'MMMM d, yyyy')}
                     </span>

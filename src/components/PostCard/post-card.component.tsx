@@ -1,29 +1,37 @@
 import { ReactElement, useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { formatDistance } from 'date-fns';
+
+import style from './post-card.module.scss';
+import PostService from '../../api/post.api';
+// store
+import { selectLoggedUser } from '../../store/user/user.slice';
+import { useAppDispatch } from '../../store/store';
+import { updatePost } from '../../store/post/post.slice';
+// models
+import { Post } from '../../models/post.model';
+// components
+import Comment from '../Comment/comment.component';
+import PostReply from '../PostReply/post-reply.component';
+import RepostCard from '../RepostCard/repost-card.component';
+import Button from '../Button/button.component';
+// imports
 import {
   IoChatbubbleEllipsesOutline,
   IoHeartOutline,
   IoRepeatOutline,
 } from 'react-icons/io5';
-
-import { Post } from '../../models/post.model';
-import style from './post-card.module.scss';
 import { useFindUser } from '../../hooks/useFindUser';
-import Comment from '../Comment/comment.component';
-import { selectLoggedUser } from '../../store/user/user.slice';
-import PostService from '../../api/post.api';
-import { useAppDispatch } from '../../store/store';
-import { updatePost } from '../../store/post/post.slice';
-import { Link, useLocation } from 'react-router-dom';
-import PostReply from '../PostReply/post-reply.component';
-import RepostCard from '../RepostCard/repost-card.component';
-import Button from '../Button/button.component';
+import { formatDistance } from 'date-fns';
 
 interface IPostCard {
   post: Post;
 }
 
+/**
+ * Renders the post card using the provided information
+ * @param post - The post information object
+ */
 function PostCard({ post }: IPostCard): ReactElement {
   const location = useLocation();
   const dispatch = useAppDispatch();

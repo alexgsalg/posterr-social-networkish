@@ -1,7 +1,11 @@
 import { ReactElement } from 'react';
-import style from './feed-filter.module.scss';
 import { NavLink } from 'react-router-dom';
 
+import style from './feed-filter.module.scss';
+
+/**
+ * Renders all post filters and redirects to the respective path
+ */
 function FeedFilter(): ReactElement {
   return (
     <nav className={style.nav + ' nav mb-4'}>

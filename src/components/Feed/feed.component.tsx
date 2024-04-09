@@ -1,16 +1,28 @@
 import { ReactElement, useEffect, useState } from 'react';
-import { Post } from '../../models/post.model';
 import { useSelector } from 'react-redux';
-import { selectPosts } from '../../store/post/post.slice';
+
 import style from './feed.module.scss';
-import PostCard from '../PostCard/post-card.component';
+// store
+import { selectPosts } from '../../store/post/post.slice';
 import { selectLoggedUser } from '../../store/user/user.slice';
+// models
+import { Post } from '../../models/post.model';
+// components
+import PostCard from '../PostCard/post-card.component';
+// imports
 import { sortPots } from '../../utils/post.utils';
 
 interface IFeed {
   path: string;
 }
 
+/**
+ * Sort and pass a list of posts based on the current path:
+ * - If route is a/ll, pass all posts;
+ * - If route is /following, pass post from users that tha loggedUser follows;
+ * - If route is user, pass all post from and related to target user;
+ * @param path - Current path.
+ */
 function Feed({ path }: IFeed): ReactElement {
   const allPosts = useSelector(selectPosts) as Post[];
   const loggedUser = useSelector(selectLoggedUser);

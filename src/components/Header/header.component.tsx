@@ -1,11 +1,13 @@
 import { ReactElement } from 'react';
-import style from './header.module.scss';
-
-import { IoNotificationsOutline, IoMailOutline } from 'react-icons/io5';
-import Logo from '../../assets/images/logo.png';
 import { useSelector } from 'react-redux';
+
+import style from './header.module.scss';
+import Logo from '../../assets/images/logo.png';
+// store
 import { selectLoggedUser } from '../../store/user/user.slice';
+// components
 import Button from '../Button/button.component';
+import { IoNotificationsOutline, IoMailOutline } from 'react-icons/io5';
 
 function HeaderComponent(): ReactElement {
   const user = useSelector(selectLoggedUser);

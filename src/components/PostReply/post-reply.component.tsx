@@ -1,26 +1,30 @@
 import { ReactElement, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import style from './post-reply.module.scss';
-import { User } from '../../models/user.model';
-import { Post } from '../../models/post.model';
 import PostService from '../../api/post.api';
 import UserService from '../../api/user.api';
+// store
+import { useAppDispatch } from '../../store/store';
 import {
   addComment,
   addPost,
   selectDailyQuota,
   updatePost,
 } from '../../store/post/post.slice';
-import { useAppDispatch } from '../../store/store';
 import {
   selectLoggedUser,
   updateLoggedUser,
 } from '../../store/user/user.slice';
-import { createPost, createRepost } from '../../utils/post.utils';
-import { useLocation } from 'react-router-dom';
-import { useFindPost } from '../../hooks/useFindPost';
+// models
+import { User } from '../../models/user.model';
+import { Post } from '../../models/post.model';
+// components
 import Button from '../Button/button.component';
+// imports
+import { createPost, createRepost } from '../../utils/post.utils';
+import { useFindPost } from '../../hooks/useFindPost';
 
 interface IPostReply {
   type: 'comment' | 'repost' | undefined;

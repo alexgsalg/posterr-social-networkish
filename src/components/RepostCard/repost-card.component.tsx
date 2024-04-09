@@ -1,13 +1,19 @@
 import { ReactElement } from 'react';
-import { useFindUser } from '../../hooks/useFindUser';
-import style from './repost-card.module.scss';
-import { Repost } from '../../models/post.model';
 import { Link, useLocation } from 'react-router-dom';
+
+import style from './repost-card.module.scss';
+// imports
+import { Repost } from '../../models/post.model';
+import { useFindUser } from '../../hooks/useFindUser';
 
 interface IRepostCard {
   target: Repost;
 }
 
+/**
+ * Renders the Repost card using the provided object.
+ * @param target - The target post object.
+ */
 function RepostCard({ target }: IRepostCard): ReactElement {
   const location = useLocation();
   const repost = useFindUser(target.userId);

@@ -1,22 +1,26 @@
 import { ReactElement, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import style from './ativity-box.module.scss';
-import { User } from '../../models/user.model';
-import { Post } from '../../models/post.model';
 import PostService from '../../api/post.api';
 import UserService from '../../api/user.api';
-import { addPost, selectDailyQuota } from '../../store/post/post.slice';
+// store
 import { useAppDispatch } from '../../store/store';
+import { addPost, selectDailyQuota } from '../../store/post/post.slice';
 import {
   selectLoggedUser,
   updateLoggedUser,
 } from '../../store/user/user.slice';
+// models
+import { User } from '../../models/user.model';
+import { Post } from '../../models/post.model';
+// components
+import Button from '../Button/button.component';
+// imports
 import { createPost } from '../../utils/post.utils';
-import { useLocation } from 'react-router-dom';
 import { getUserIdFromPath } from '../../utils/path.utils';
 import { IoPaperPlane } from 'react-icons/io5';
-import Button from '../Button/button.component';
 
 /**
  * Box to white a new post depending on the route:

@@ -1,13 +1,19 @@
 import { ReactElement } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+import style from './user-card.module.scss';
+// store
+import { selectLoggedUser } from '../../store/user/user.slice';
+// models
+import { User } from '../../models/user.model';
+// imports
+import { IoLocationOutline, IoPerson } from 'react-icons/io5';
 import { format } from 'date-fns';
 
-import { IoLocationOutline, IoCalendarOutline } from 'react-icons/io5';
-import { User } from '../../models/user.model';
-import style from './user-card.module.scss';
-import { useSelector } from 'react-redux';
-import { selectLoggedUser } from '../../store/user/user.slice';
-
+/**
+ * Renders the card used on the Homepage that contains basic information about the Logged user.
+ */
 function UserCard(): ReactElement {
   const location = useLocation();
   const user = useSelector(selectLoggedUser) as User;
@@ -70,9 +76,12 @@ function UserCard(): ReactElement {
                   Posts
                 </small>
               </div>
-              <div className="col-12 col-sm-6 col-md-8 col-lg-8 px-2 text-center text-md-end">
-                <small className={'text-secondary'}>
-                  <IoCalendarOutline />
+              <div className="col-12 col-sm-6 col-md-8 col-lg-8 px-2">
+                <small
+                  className={
+                    'text-secondary d-flex align-items-center justify-content-center justify-content-md-end'
+                  }>
+                  <IoPerson />
                   <span className={'text-light ps-2'}>
                     {format(user?.createdAt, 'MMMM d, yyyy')}
                   </span>

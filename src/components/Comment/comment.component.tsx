@@ -1,14 +1,17 @@
 import { ReactElement, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import style from './comment.module.scss';
-import { useFindUser } from '../../hooks/useFindUser';
-import { formatDistance } from 'date-fns';
-import { useSelector } from 'react-redux';
+// store
 import { selectLoggedUser } from '../../store/user/user.slice';
+// components
+import Button from '../Button/button.component';
+// imports
 import { IoHeartOutline } from 'react-icons/io5';
 import { useFindComment } from '../../hooks/useFindComment';
-import { Link } from 'react-router-dom';
-import Button from '../Button/button.component';
+import { useFindUser } from '../../hooks/useFindUser';
+import { formatDistance } from 'date-fns';
 
 interface IComment {
   commentId: string;
