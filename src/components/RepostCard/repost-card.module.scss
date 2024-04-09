@@ -6,7 +6,7 @@
 
   &__link {
     filter: saturate(0);
-    color: var(--bs-gray-400);
+    color: var(--bs-gray-400) !important;
 
     &:hover {
       filter: saturate(1);

@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router';
 import Modal from 'react-bootstrap/Modal';
 import Feed from '../../components/Feed/feed.component';
@@ -36,6 +36,7 @@ function UserPage(): ReactElement {
   const [following, setFollowing] = useState<boolean>(false);
   const [isLoggedUser, setIsLoggedUser] = useState<boolean>(false);
   const [user, setUser] = useState<User | null>(null);
+  const [userNameTag, setUserNameTag] = useState<string | undefined>('');
 
   useEffect(() => {
     setIsLoading(true);
@@ -56,6 +57,9 @@ function UserPage(): ReactElement {
       setUser(user as User);
       setIsLoggedUser(false);
     }
+
+    const username = user?.name.split(' ').join('').toLocaleLowerCase();
+    setUserNameTag(username);
     setIsLoading(false);
   }, [pathname]);
 
@@ -182,7 +186,7 @@ function UserPage(): ReactElement {
                   }>
                   {user?.name}
                 </h1>
-                <p className={'text-light'}>@alexSalgado</p>
+                <p className={'text-light'}>@{userNameTag}</p>
               </div>
 
               <div className="col row mx-0">
