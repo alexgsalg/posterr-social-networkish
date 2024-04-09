@@ -4,10 +4,8 @@ import {
   asyncThunkCreator,
   buildCreateSlice,
 } from '@reduxjs/toolkit';
-import { createSelector } from 'reselect';
 
 import { User } from '../../models/user.model';
-import api from '../../api/axios';
 
 export interface UserState {
   users: User[];

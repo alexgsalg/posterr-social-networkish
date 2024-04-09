@@ -5,7 +5,6 @@ import {
 } from '@reduxjs/toolkit';
 import { Post } from '../../models/post.model';
 import { AxiosError } from 'axios';
-import { isSameDay } from 'date-fns';
 import { handleQuota } from '../../utils/post.utils';
 
 // Hard-coded
