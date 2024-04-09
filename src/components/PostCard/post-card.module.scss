@@ -73,7 +73,7 @@
       &.active {
         outline: none !important;
         border-color: transparent !important;
-        color: var(--clr-posterr-200);
+        color: var(--clr-posterr-200) !important;
       }
     }
 
@@ -89,10 +89,10 @@
         align-items: center;
         gap: 0.5rem;
         padding: 0.25rem 0.5rem;
-        background-color: transparent;
-        border: 1px solid var(--bs-gray-600);
+        // background-color: transparent;
+        // border: 1px solid var(--bs-gray-600);
         border-radius: 0.5rem;
-        color: var(--bs-gray-600);
+        // color: var(--bs-gray-600);
         transition: color 195ms ease;
 
         &:active,

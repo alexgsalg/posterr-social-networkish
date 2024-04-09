@@ -16,7 +16,7 @@ interface IFeed {
 function Feed({ path }: IFeed): ReactElement {
   const allPosts = useSelector(selectPosts) as Post[];
   const loggedUser = useSelector(selectLoggedUser);
-  const [isloadingFeed, setIsloadingFeed] = useState<boolean>(false);
+  const [isLoadingFeed, setIsloadingFeed] = useState<boolean>(false);
   const [posts, setPosts] = useState<Post[]>([]);
 
   /** Filter posts depending on the url */
@@ -45,13 +45,13 @@ function Feed({ path }: IFeed): ReactElement {
     const userId = slicedPath[slicedPath.length - 1];
     const filtered =
       allPosts.filter((el) => {
-        return el.user === userId;
+        return el.user === userId || el.targetUser === userId;
       }) || [];
     setPosts(sortPots(filtered));
   };
 
   /** Loading state */
-  if (isloadingFeed)
+  if (isLoadingFeed)
     return (
       <div className="w-full d-flex justify-content-center p-5">
         <div className="spinner-border text-primary" role="status">

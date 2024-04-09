@@ -17,6 +17,8 @@ import { useAppDispatch } from '../../store/store';
 import { updatePost } from '../../store/post/post.slice';
 import { Link, useLocation } from 'react-router-dom';
 import PostReply from '../PostReply/post-reply.component';
+import RepostCard from '../RepostCard/repost-card.component';
+import Button from '../Button/button.component';
 
 interface IPostCard {
   post: Post;
@@ -24,15 +26,14 @@ interface IPostCard {
 
 function PostCard({ post }: IPostCard): ReactElement {
   const location = useLocation();
-
   const dispatch = useAppDispatch();
+
   const loggedUser = useSelector(selectLoggedUser);
   const [isliked, setIsLiked] = useState<boolean>(false);
   const [isCommentBox, setIsCommentBox] = useState<boolean>(true);
 
   const postUser = useFindUser(post.user);
   const postTargetUser = useFindUser(post.targetUser);
-  const repostTargetUser = useFindUser(post.repost?.userId);
   const isAuthor = post.user === loggedUser?.id;
   const liked = post.likes.some((id) => id === postUser?.id);
 
@@ -44,7 +45,7 @@ function PostCard({ post }: IPostCard): ReactElement {
   const onLikeAction = async () => {
     if (!postUser || !post) return;
 
-    const updatedPost = post;
+    const updatedPost: Post = JSON.parse(JSON.stringify(post));
     if (isliked) {
       updatedPost.likes = updatedPost.likes.filter(
         (likes: string) => likes !== postUser?.id,
@@ -115,51 +116,41 @@ function PostCard({ post }: IPostCard): ReactElement {
           ) : null}
 
           {/* Repost */}
-          {post.repost && (
-            <article className={style.post_body_repost}>
-              <div className="d-flex align-items-center gap-2">
-                <img
-                  src={repostTargetUser?.avatar}
-                  className={style.post_body_repost__image}
-                  alt="user photo"
-                  aria-hidden="true"
-                />
-                <small className={style.post_body_repost__name}>
-                  {repostTargetUser?.name} - Repost
-                </small>
-              </div>
-              <p className="text-light mt-3 mb-2">{post.repost.content}</p>
-            </article>
-          )}
+          {post.repost && <RepostCard target={post.repost} />}
         </div>
 
         <footer className={style.post_footer}>
           {!isAuthor && (
-            <button
-              className={`${style.post_footer_counter} ${liked ? style.active : ''}`}
-              onClick={onLikeAction}>
+            <Button
+              variant="clear"
+              addClass={`${style.post_footer_counter} ${liked ? style.active : ''}`}
+              onClick={() => onLikeAction()}>
               <IoHeartOutline aria-hidden="true" /> {post?.likes?.length}
-            </button>
+            </Button>
           )}
-          <button className={style.post_footer_counter} onClick={onLikeAction}>
+          <Button
+            variant="clear"
+            addClass={style.post_footer_counter + ' pe-none'}>
             <IoChatbubbleEllipsesOutline aria-hidden="true" />{' '}
             {post?.comments?.length}
-          </button>
+          </Button>
 
           <div className={style.post_footer_box}>
-            <button
-              className={`${style.post_footer_box__btn} ${isCommentBox ? style.active : ''}`}
+            <Button
+              variant={isCommentBox ? 'primary' : 'secondary'}
+              outline={true}
+              addClass={style.post_footer_box__btn}
               onClick={() => setIsCommentBox(true)}>
-              <IoChatbubbleEllipsesOutline aria-hidden="true" />
-              Comment
-            </button>
+              <IoChatbubbleEllipsesOutline aria-hidden="true" /> Comment
+            </Button>
             {!isAuthor && (
-              <button
-                className={`${style.post_footer_box__btn} ${!isCommentBox ? style.active : ''}`}
+              <Button
+                variant={isCommentBox ? 'secondary' : 'primary'}
+                outline={true}
+                addClass={style.post_footer_box__btn}
                 onClick={() => setIsCommentBox(false)}>
-                <IoRepeatOutline aria-hidden="true" />
-                Repost
-              </button>
+                <IoRepeatOutline aria-hidden="true" /> Repost
+              </Button>
             )}
           </div>
         </footer>

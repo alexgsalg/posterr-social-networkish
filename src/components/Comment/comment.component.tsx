@@ -8,6 +8,7 @@ import { selectLoggedUser } from '../../store/user/user.slice';
 import { IoHeartOutline } from 'react-icons/io5';
 import { useFindComment } from '../../hooks/useFindComment';
 import { Link } from 'react-router-dom';
+import Button from '../Button/button.component';
 
 interface IComment {
   commentId: string;
@@ -65,10 +66,12 @@ function Comment({ commentId }: IComment): ReactElement {
 
       <footer className={style.comment_footer + ' d-flex align-items-center'}>
         {!isAuthor && (
-          <button className={style.comment_footer_box + ' btn me-1 p-1'}>
+          <Button
+            variant="clear"
+            addClass={style.comment_footer_box + ' btn me-1 p-1'}>
             <IoHeartOutline aria-hidden="true" /> {comment?.likes?.length}
             {comment?.likes?.length}
-          </button>
+          </Button>
         )}
       </footer>
     </article>

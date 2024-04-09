@@ -1,0 +1,71 @@
+@mixin customBtn($bgColor, $fontColor, $border) {
+  background-color: $bgColor !important;
+  color: $fontColor !important;
+  border-color: $border !important;
+}
+
+.primary {
+  @include customBtn(var(--bs-purple), var(--bs-light), var(--bs-purple));
+
+  &:hover {
+    @include customBtn(var(--bs-indigo), var(--bs-light), var(--bs-indigo));
+  }
+
+  &-outline {
+    border-width: 1px !important;
+    border-style: solid !important;
+    @include customBtn(transparent, var(--bs-purple), var(--bs-purple));
+  }
+}
+
+.secondary {
+  @include customBtn(
+    var(--clr-posterr-300),
+    var(--bs-light),
+    var(--clr-posterr-300)
+  );
+
+  &:hover {
+    @include customBtn(
+      var(--clr-posterr-400),
+      var(--bs-light),
+      var(--clr-posterr-400)
+    );
+  }
+
+  &-outline {
+    border-width: 1px !important;
+    border-style: solid !important;
+    @include customBtn(
+      transparent,
+      var(--clr-posterr-300),
+      var(--clr-posterr-300)
+    );
+  }
+}
+
+.clear {
+  @include customBtn(transparent, inherit, transparent);
+}
+
+.light {
+  @include customBtn(
+    var(--bs-gray-200),
+    var(--clr-gray-dark),
+    var(--bs-gray-200)
+  );
+
+  &:hover {
+    @include customBtn(
+      var(--bs-gray-300),
+      var(--clr-gray-dark),
+      var(--bs-gray-300)
+    );
+  }
+
+  &-outline {
+    border-width: 1px !important;
+    border-style: solid !important;
+    @include customBtn(transparent, var(--bs-gray-200), var(--bs-gray-200));
+  }
+}

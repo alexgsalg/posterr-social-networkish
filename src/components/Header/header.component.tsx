@@ -5,6 +5,7 @@ import { IoNotificationsOutline, IoMailOutline } from 'react-icons/io5';
 import Logo from '../../assets/images/logo.png';
 import { useSelector } from 'react-redux';
 import { selectLoggedUser } from '../../store/user/user.slice';
+import Button from '../Button/button.component';
 
 function HeaderComponent(): ReactElement {
   const user = useSelector(selectLoggedUser);
@@ -39,14 +40,16 @@ function HeaderComponent(): ReactElement {
               alt="User Avatar"
             />
           </div>
-          <button
-            className={style.header_actions__icon + ' btn btn-sm btn-clear'}>
-            <IoNotificationsOutline />
-          </button>
-          <button
-            className={style.header_actions__icon + ' btn btn-sm btn-clear'}>
-            <IoMailOutline />
-          </button>
+          <Button
+            variant="clear"
+            addClass={style.header_actions__icon + ' text-light'}>
+            <IoNotificationsOutline aria-hidden="true" />
+          </Button>
+          <Button
+            variant="clear"
+            addClass={style.header_actions__icon + ' text-light'}>
+            <IoMailOutline aria-hidden="true" />
+          </Button>
         </div>
       </div>
     </header>

@@ -16,6 +16,7 @@ import { createPost } from '../../utils/post.utils';
 import { useLocation } from 'react-router-dom';
 import { getUserIdFromPath } from '../../utils/path.utils';
 import { IoPaperPlane } from 'react-icons/io5';
+import Button from '../Button/button.component';
 
 /**
  * Box to white a new post depending on the route:
@@ -100,16 +101,15 @@ function ActivityBox(): ReactElement {
       </div>
       <div className="d-flex justify-content-end align-items-center gap-3 p-3">
         <small className={style.activity__counter}>{charCount}/777</small>
-        <button
-          className={
+        <Button
+          addClass={
             style.activity__btn + ' col-8 col-sm-6 col-md-4 col-lg-3 btn'
           }
-          type="button"
           disabled={dailyQuota === 5 || message.length <= 0}
           onClick={onSubmit}>
           <IoPaperPlane />
-          Repost
-        </button>
+          Post
+        </Button>
       </div>
     </form>
   );

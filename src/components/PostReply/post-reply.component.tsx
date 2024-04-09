@@ -20,6 +20,7 @@ import {
 import { createPost, createRepost } from '../../utils/post.utils';
 import { useLocation } from 'react-router-dom';
 import { useFindPost } from '../../hooks/useFindPost';
+import Button from '../Button/button.component';
 
 interface IPostReply {
   type: 'comment' | 'repost' | undefined;
@@ -84,10 +85,10 @@ function PostReply({ type, repostTarget, targetId }: IPostReply): ReactElement {
 
     if (newReplyId) {
       // add CommentID to the target post
-      await updateTargetPost(newReplyId);
+      await onUpdateTargetPost(newReplyId);
 
       // add PostID to LoggedUser
-      await updateLoggedUserPostList(newReplyId);
+      await onUpdateLoggedUserPostList(newReplyId);
     }
     resetComponent();
   };
@@ -106,11 +107,11 @@ function PostReply({ type, repostTarget, targetId }: IPostReply): ReactElement {
       .catch((err) => console.log('error', err));
 
     if (newPostId) {
-      updateLoggedUserPostList(newPostId);
+      onUpdateLoggedUserPostList(newPostId);
     }
   };
 
-  const updateTargetPost = async (newReplyId: string) => {
+  const onUpdateTargetPost = async (newReplyId: string) => {
     const targetClone: Post = JSON.parse(JSON.stringify(targetPost));
     targetClone.comments.push(newReplyId);
     await PostService.updatePost(targetClone)
@@ -120,7 +121,7 @@ function PostReply({ type, repostTarget, targetId }: IPostReply): ReactElement {
       .catch((err) => console.log('error', err));
   };
 
-  const updateLoggedUserPostList = async (newReplyId: string) => {
+  const onUpdateLoggedUserPostList = async (newReplyId: string) => {
     const userClone: User = JSON.parse(JSON.stringify(loggedUser));
     userClone.posts.push(newReplyId);
     const userUpdated = userClone;
@@ -151,21 +152,21 @@ function PostReply({ type, repostTarget, targetId }: IPostReply): ReactElement {
       </div>
       <div className="col-3 col-lg-2">
         {type === 'repost' ? (
-          <button
-            className={style.post_reply__btn_repost + ' btn py-2 w-100'}
-            type="button"
+          <Button
+            variant="primary"
+            addClass={style.post_reply__btn_repost + ' py-2 w-100'}
             disabled={dailyQuota === 5}
             onClick={onRepost}>
             Repost
-          </button>
+          </Button>
         ) : (
-          <button
-            className={style.post_reply__btn_comment + ' btn py-2 w-100'}
-            type="button"
+          <Button
+            variant="secondary"
+            addClass={style.post_reply__btn_repost + ' py-2 w-100'}
             disabled={message?.length <= 0 || dailyQuota === 5}
             onClick={onCommentSubmit}>
             Comment
-          </button>
+          </Button>
         )}
       </div>
     </form>
