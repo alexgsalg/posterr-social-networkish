@@ -2,11 +2,9 @@ import { ReactElement, useEffect, useState } from 'react';
 import { Post } from '../../models/post.model';
 import { useSelector } from 'react-redux';
 import { selectPosts } from '../../store/post/post.slice';
-import { User } from '../../models/user.model';
 import style from './feed.module.scss';
 import PostCard from '../PostCard/post-card.component';
 import { selectLoggedUser } from '../../store/user/user.slice';
-import { getUserIdFromPath } from '../../utils/path.utils';
 import { sortPots } from '../../utils/post.utils';
 
 interface IFeed {

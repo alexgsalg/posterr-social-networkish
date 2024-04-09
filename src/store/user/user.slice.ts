@@ -43,6 +43,14 @@ const usersSlice = createSliceWithThunks({
         state.loggedUser = action.payload;
       },
     ),
+    updateOneUser: create.reducer<User>(
+      (state, action: PayloadAction<User>) => {
+        const idx = state.users.findIndex(
+          (user) => user.id === action.payload.id,
+        );
+        state.users[idx] = action.payload;
+      },
+    ),
     logInUser: create.reducer<User>((state, action: PayloadAction<User>) => {
       state.loggedUser = action.payload;
     }),
@@ -55,7 +63,8 @@ const usersSlice = createSliceWithThunks({
   },
 });
 
-export const { setUsers, updateLoggedUser, logInUser } = usersSlice.actions;
+export const { setUsers, updateLoggedUser, updateOneUser, logInUser } =
+  usersSlice.actions;
 export const {
   selectUsers,
   selectUserLoading,

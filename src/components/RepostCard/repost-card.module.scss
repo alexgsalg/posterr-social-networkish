@@ -1,0 +1,28 @@
+.repost {
+  background: var(--bs-gray-800);
+  padding: 1rem;
+  border-radius: 0.4rem;
+  display: inline-block;
+
+  &__link {
+    filter: saturate(0);
+    color: var(--bs-gray-400);
+
+    &:hover {
+      filter: saturate(1);
+      color: var(--clr-posterr-100) !important;
+    }
+  }
+
+  &__name {
+    color: inherit;
+  }
+
+  &__image {
+    width: 25px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+}

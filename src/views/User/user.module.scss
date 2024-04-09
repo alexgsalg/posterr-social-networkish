@@ -1,0 +1,42 @@
+.user {
+  &__topeffect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: block;
+    max-height: 100px;
+    background-color: var(--clr-posterr-400);
+    border-radius: 5px 5px 0 0;
+    z-index: 0;
+  }
+
+  &_header {
+    position: relative;
+    margin-top: -2.2rem;
+    margin-bottom: 1.5rem;
+    row-gap: 1.5rem;
+    z-index: 1;
+
+    &_picture {
+      width: 100%;
+      max-width: 120px;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      border: 4px solid var(--clr-posterr-400);
+      overflow: hidden;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    &__name {
+      font-size: 1.25rem;
+    }
+
+    &__detail {
+      color: var(--clr-gray-200) !important;
+    }
+  }
+}

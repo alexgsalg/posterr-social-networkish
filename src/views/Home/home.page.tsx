@@ -1,10 +1,7 @@
 import { ReactElement } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 import UserCard from '../../components/UserCard/user-card.component';
-import { selectLoggedUser } from '../../store/user/user.slice';
-import { User } from '../../models/user.model';
 import style from './home.module.scss';
 import FeedFilter from '../../components/FeedFilter/feed-filter.component';
 import Feed from '../../components/Feed/feed.component';
