@@ -38,7 +38,7 @@ This project was created as an assignment and does not contain real life informa
 
 ## If I had more time:
 
-- Create custom hooks to handle API calls to follow the DRY methodology.
+- Create custom hooks to handle API calls to follow the DRY and SOLID methodology.
 - Add more components to break even more the amount od lines from the pages.
 - Add more util functions.
 - Implement tests using Jest and/or Cypress.
