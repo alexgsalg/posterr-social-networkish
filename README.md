@@ -1,4 +1,4 @@
-# Posterr Social Network
+# Post Social Network
 
 This project was created as an assignment and does not contain real life information.
 
@@ -16,7 +16,6 @@ This project was created as an assignment and does not contain real life informa
 - React-bootstrap
 - Axios
 - Date-fns
-- Posterr structure, pallete and references [Using Figma](https://www.figma.com/file/nEEDnAQWzIDciQAo7OSX1W/Posterr-structure?type=whiteboard&node-id=0%3A1&t=aRoZTGLRXziomxtn-1)
 - Mock data nd api created using [Mockapi.io](https://mockapi.io) Althought not asked I believe that a functional API can change the way we create code so I used Mockapi to simulate a functional API.
 
 ## This project is formated with:
