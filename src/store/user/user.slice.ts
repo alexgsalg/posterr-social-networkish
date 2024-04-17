@@ -55,6 +55,7 @@ const usersSlice = createSliceWithThunks({
   }),
   selectors: {
     selectUsers: (sliceState) => sliceState.users,
+    selectUserCount: (sliceState) => sliceState.users.length || 0,
     selectLoggedUser: (sliceState) => sliceState.loggedUser,
     selectUserLoading: (sliceState) => sliceState.isLoading,
     selectUsersError: (sliceState) => sliceState.error,
@@ -65,6 +66,7 @@ export const { setUsers, updateLoggedUser, updateOneUser, logInUser } =
   usersSlice.actions;
 export const {
   selectUsers,
+  selectUserCount,
   selectUserLoading,
   selectUsersError,
   selectLoggedUser,

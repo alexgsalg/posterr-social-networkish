@@ -69,12 +69,17 @@ const postsSlice = createSliceWithThunks({
   }),
   selectors: {
     selectPosts: (sliceState) => sliceState.posts || [],
+    selectPostCount: (sliceState) => sliceState.posts.length || 0,
     selectComments: (sliceState) => sliceState.comments || [],
     selectDailyQuota: (sliceState) => sliceState.dailyPosts,
   },
 });
 
 export const { setPosts, addPost, addComment, updatePost } = postsSlice.actions;
-export const { selectPosts, selectComments, selectDailyQuota } =
-  postsSlice.selectors;
+export const {
+  selectPosts,
+  selectPostCount,
+  selectComments,
+  selectDailyQuota,
+} = postsSlice.selectors;
 export default postsSlice.reducer;

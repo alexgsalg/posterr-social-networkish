@@ -85,7 +85,7 @@ function UserPage(): ReactElement {
 
     // check if follows or not
     if (following) {
-      newLoggedUser.following = newLoggedUser.following.filter(
+      newLoggedUser.following = newLoggedUser?.following.filter(
         (user: string) => user !== newUser.id,
       );
       newUser.followers = newUser.followers.filter(

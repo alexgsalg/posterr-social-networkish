@@ -1,15 +1,74 @@
-import { ReactElement } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-import UserCard from '../../components/UserCard/user-card.component';
 import style from './home.module.scss';
+import UserService from '../../api/user.api';
+import api from '../../api/axios';
+// store
+import ActivityBox from '../../components/ActivityBox/activity-box.component';
+import { useAppDispatch } from '../../store/store';
+import { selectPostCount, setPosts } from '../../store/post/post.slice';
+import {
+  setUsers,
+  logInUser,
+  selectUserCount,
+} from '../../store/user/user.slice';
+import {
+  resetTimeout,
+  selectHasTimerEnded,
+} from '../../store/general/general.slice';
+// components
+import UserCard from '../../components/UserCard/user-card.component';
 import FeedFilter from '../../components/FeedFilter/feed-filter.component';
 import Feed from '../../components/Feed/feed.component';
-import ActivityBox from '../../components/ActivityBox/activity-box.component';
 
 function HomePage(): ReactElement {
   const { pathname } = useLocation();
+  const dispatch = useAppDispatch();
+  const userCount = useSelector(selectUserCount);
+  const postsCount = useSelector(selectPostCount);
+  const refetchData = useSelector(selectHasTimerEnded);
+  const [isLoading, SetLoading] = useState<boolean>(false);
 
+  useEffect(() => {
+    SetLoading(true);
+    initUsers();
+    initPosts();
+
+    if (refetchData) {
+      dispatch(resetTimeout());
+    }
+    SetLoading(false);
+  });
+
+  const initUsers = async () => {
+    if (userCount <= 0 || refetchData) {
+      const usersList = await UserService.getUsers();
+      dispatch(setUsers(usersList));
+      dispatch(logInUser(usersList[0]));
+    }
+  };
+
+  const initPosts = async () => {
+    if (postsCount <= 0 || refetchData) {
+      const response = await api.get('/post');
+      const posts = response.data;
+      dispatch(setPosts(posts));
+    }
+  };
+
+  /** Loading state */
+  if (isLoading)
+    return (
+      <div className="w-full d-flex justify-content-center p-5">
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+
+  /** Default state */
   return (
     <>
       <section className={style.home + ' px-2 py-4'}>
